@@ -13,7 +13,10 @@ logger = logging.getLogger(__name__)
 revio_router = APIRouter(prefix="/revio", tags=["Revio Business Review"])
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-ARTIFACTS_DIR = REPO_ROOT / "revio_business_review_experiment" / "artifacts"
+if (REPO_ROOT / "api" / "artifacts").exists():
+    ARTIFACTS_DIR = REPO_ROOT / "api" / "artifacts"
+else:
+    ARTIFACTS_DIR = REPO_ROOT / "revio_business_review_experiment" / "artifacts"
 
 CHAMPION_MODEL_PATH = ARTIFACTS_DIR / "yelp_word_char_lr.joblib"
 CHAMPION_META_PATH = ARTIFACTS_DIR / "yelp_word_char_lr.metadata.json"

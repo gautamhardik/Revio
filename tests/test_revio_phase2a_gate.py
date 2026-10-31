@@ -31,7 +31,7 @@ from fastapi import HTTPException
 # Path setup
 REPO_ROOT = Path(__file__).resolve().parents[1]
 ML_SERVICE_DIR = REPO_ROOT / "ml_service"
-ARTIFACTS_DIR = REPO_ROOT / "revio_business_review_experiment" / "artifacts"
+ARTIFACTS_DIR = (REPO_ROOT / "api" / "artifacts") if (REPO_ROOT / "api" / "artifacts").exists() else (REPO_ROOT / "revio_business_review_experiment" / "artifacts")
 
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
