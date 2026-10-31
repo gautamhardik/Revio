@@ -1079,7 +1079,7 @@
     if (reviewColIdx === -1) reviewColIdx = 0;
 
     const rows = [];
-    for (let i = 1; i < lines.length && rows.length < 100; i++) {
+    for (let i = 1; i < lines.length && rows.length < 2500; i++) {
       const parts = parseCsvLine(lines[i]);
       const text = (parts[reviewColIdx] || '').replace(/^["']|["']$/g, '').trim();
       if (text.length > 3) {
@@ -1248,6 +1248,10 @@
       for (let c = 0; c < chunks.length; c++) {
         const chunk = chunks[c];
         const chunkTexts = chunk.map(item => item.row.text);
+        const stage3Span = document.getElementById('procStage3Span');
+        if (stage3Span) {
+          stage3Span.textContent = `Analysing sentiment (Processing ${processedCount + 1}–${Math.min(processedCount + chunk.length, total)} of ${total})`;
+        }
         updateProcessingStages(
           3,
           `Executing inference (${processedCount} of ${total} reviews` +
@@ -1353,6 +1357,10 @@
     }
     const label = document.getElementById('processingStatusText');
     if (label) label.textContent = statusText;
+    if (activeStage > 3) {
+      const stage3Span = document.getElementById('procStage3Span');
+      if (stage3Span) stage3Span.textContent = 'Analysing sentiment (Completed)';
+    }
 
     const counter = document.getElementById('processingCounter');
     if (counter) {
