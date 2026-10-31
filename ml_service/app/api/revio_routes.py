@@ -89,6 +89,51 @@ def detect_domain_safeguard(text: str, explicit_domain: Optional[str] = None) ->
     # 3. Default for text without trigger phrases in standard local review mode
     return "Restaurants & Local Services", True
 
+def ensure_model_binary(path: Path) -> Path:
+    """
+    Ensures the model path points to a valid deserializable binary.
+    If the file is an unresolved Git LFS pointer (< 2KB starting with 'version'),
+    hydrates the real model binary from GitHub's media CDN into /tmp.
+    """
+    if not path.is_file():
+        return path
+
+    try:
+        if path.stat().st_size < 2048:
+            with open(path, "rb") as f:
+                header = f.read(30)
+            if header.startswith(b"version https://git-lfs"):
+                tmp_dir = Path("/tmp/revio_artifacts")
+                tmp_dir.mkdir(parents=True, exist_ok=True)
+                cached_target = tmp_dir / path.name
+                
+                if not cached_target.exists() or cached_target.stat().st_size < 500000:
+                    import urllib.request
+                    urls = [
+                        f"https://media.githubusercontent.com/media/gautamhardik/Revio/main/api/artifacts/{path.name}",
+                        f"https://raw.githubusercontent.com/gautamhardik/Revio/main/api/artifacts/{path.name}",
+                        f"https://media.githubusercontent.com/media/gautamhardik/Sentiment-Analysis/main/api/artifacts/{path.name}"
+                    ]
+                    for url in urls:
+                        try:
+                            req = urllib.request.Request(url, headers={"User-Agent": "RevioServerless/1.0"})
+                            with urllib.request.urlopen(req, timeout=15) as resp:
+                                data = resp.read()
+                            if len(data) > 500000:
+                                with open(cached_target, "wb") as out:
+                                    out.write(data)
+                                break
+                        except Exception as dl_err:
+                            logger.warning(f"Failed artifact download from {url}: {dl_err}")
+                            continue
+                
+                if cached_target.exists() and cached_target.stat().st_size > 500000:
+                    return cached_target
+    except Exception as e:
+        logger.warning(f"Failed LFS pointer hydration check: {e}")
+
+    return path
+
 def get_revio_model(version: Optional[str] = None):
     """
     Returns (model, metadata) for requested version ('champion' or 'candidate').
@@ -122,7 +167,8 @@ def get_revio_model(version: Optional[str] = None):
         meta_path = CHAMPION_META_PATH
 
     if active_target not in _cached_models:
-        loaded_model = joblib.load(model_path)
+        resolved_path = ensure_model_binary(model_path)
+        loaded_model = joblib.load(resolved_path)
         _cached_models[active_target] = loaded_model
         try:
             vec = loaded_model.named_steps.get("features")

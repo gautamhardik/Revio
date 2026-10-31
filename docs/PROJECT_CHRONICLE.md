@@ -1682,6 +1682,26 @@
 - **Latency Benchmarks:** Warm serverless inference ~5.8 to 9.5 ms. Cold-start ~800 ms.
 - **Deep Learning Isolation:** Zero PyTorch, TensorFlow, or transformers packages in serverless bundle.
 
+### Troubleshooting: "Live Prediction Gateway Unavailable" (Resolved)
+- **Symptom:** UI toast displayed `"Live prediction gateway unavailable"` when submitting reviews in the landing page playground.
+- **Root Cause Analysis:**
+  - Vercel Serverless Function logs reported:
+    ```
+    File "/tmp/_vc_deps/lib/python3.12/site-packages/joblib/numpy_pickle.py", line 577, in _unpickle
+      obj = unpickler.load()
+    File "/var/lang/lib/python3.12/pickle.py", line 1256, in load
+      dispatch[key[0]](self)
+    KeyError: 118
+    ```
+  - Byte `118` is the ASCII code for character `'v'` (`ord('v') == 118`).
+  - Because `*.joblib` was configured in `.gitattributes` with `filter=lfs`, Vercel's build environment received only the 134-byte Git LFS pointer text file (`version https://git-lfs.github.com/spec/v1...`).
+  - When `pickle.py` attempted to deserialize the text pointer, it read the first byte `'v'`, found no corresponding opcode in its dispatch table, and crashed with HTTP 500 Internal Server Error.
+- **Resolution Applied:**
+  1. **Self-Healing Model Hydration (`ensure_model_binary`):** Updated `api/index.py` and `ml_service/app/api/revio_routes.py` with `ensure_model_binary(path)`. The function checks file size and header: if an LFS text pointer is detected, it automatically downloads the full 1.2 MB binary directly from GitHub's media CDN into `/tmp/revio_artifacts/` and loads it into the singleton in-memory cache.
+  2. **Git LFS Decoupling:** Untracked `*.joblib` from Git LFS in `.gitattributes`. Because the candidate (1.16 MB) and champion (1.11 MB) models are well below GitHub's 100 MB standard blob limit, they are now directly committed as standard Git binary blobs.
+  3. **Vercel Re-Deployment:** Deployed update to production via `vercel deploy --prod --yes`.
+  4. **Live Verification:** Executed Playwright browser test against `https://revio-taupe.vercel.app/revio.html`. Verified review submission completed with HTTP 200, valid positive-class probability (45.0% mixed, 94.8% positive), active SVG needle sweep, and `TOAST COUNT: 0`.
+
 ### Current State & Next Steps
-- **Current State:** Phase 2C is complete. Revio is in production on Vercel Edge Network and Serverless Functions with 100% verified test and browser user journey pass rates.
+- **Current State:** Phase 2C is complete and operational. Revio is in production on Vercel Edge Network and Serverless Functions with 100% verified test and browser user journey pass rates.
 - **Next Steps:** Provide final completion report and live links to user.
