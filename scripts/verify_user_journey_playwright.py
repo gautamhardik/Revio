@@ -2,6 +2,7 @@
 Revio Phase 2A.2 — Complete Real Browser User Journey Verification
 Automates and screenshots the entire customer review lifecycle using Playwright.
 """
+import os
 import sys
 import time
 import json
@@ -9,7 +10,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 ARTIFACTS_DIR = Path(r"C:\Users\hiten\.gemini\antigravity\brain\7f7fe3d0-6b8a-4cad-adfe-5ea0a302c154")
-TARGET_URL = "http://localhost:4000/revio.html"
+TARGET_URL = os.environ.get("REVIO_TEST_URL", "https://revio-taupe.vercel.app/revio.html")
 
 TEST_CSV_PATH = Path(__file__).resolve().parent / "test_import_data.csv"
 
