@@ -2,10 +2,13 @@ import os
 import joblib
 import json
 import time
+import logging
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from pydantic import BaseModel, Field
 from fastapi import APIRouter, HTTPException, Query
+
+logger = logging.getLogger(__name__)
 
 revio_router = APIRouter(prefix="/revio", tags=["Revio Business Review"])
 

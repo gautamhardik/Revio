@@ -1880,3 +1880,29 @@
 
 
 
+
+
+---
+
+## 2026-11-01 - Authoritative README Overhaul for Revio Production Release
+
+### Request & Rationale
+- **Request:** "update the readme file it is of another project"
+- **Rationale:** The repository's root `README.md` previously described the legacy movie review comparison prototype ("The Screening Room" on Hugging Face Spaces). It has now been replaced with the comprehensive, production-grade documentation for **Revio**, representing the live cloud SaaS deployment on Vercel, the three Cynbit assessment deliverables, the candidate NLP model architecture, and the quantitative ROI model.
+
+### Actions Performed & Files Changed
+1. **Completely Overhauled Root `README.md` (`README.md`):**
+   - Replaced legacy cinema/movie review content with Revio's executive value proposition: risk-gated review triage across Revio (hospitality) and TenantEase (residential property operations).
+   - Added live production badges and links: Vercel production URL ([https://revio-taupe.vercel.app](https://revio-taupe.vercel.app)), live API health endpoint (`/api/v1/health`), GitHub repository, and MIT license.
+   - Incorporated a dedicated Cynbit Assessment Deliverables table linking directly to the executive PDF reports and markdown source files.
+   - Documented the 8-screen SaaS UI walkthrough with URL hash routing.
+   - Formulated the empirical ML model benchmark (showing the +10.52% negative recall improvement of the Yelp candidate model over the IMDb baseline) and mathematical foundations ($\sigma(z)$, $T=0.55$, $X_j \cdot \beta_j$).
+   - Documented local execution, testing (`pytest`), and quantitative portfolio ROI modeling (saving \$13,600/month, 75.5% cost reduction).
+2. **Preserved Test & Runtime Integrity:**
+   - Fixed missing `logging` import in `ml_service/app/api/revio_routes.py`.
+   - Verified that all 47 automated regression tests pass (`47 passed in 141.01s`).
+
+### Verification Results
+- `README.md` updated and verified.
+- Automated regression suite: 47/47 passing (100%).
+- Live production web application verified operational at [https://revio-taupe.vercel.app](https://revio-taupe.vercel.app).
