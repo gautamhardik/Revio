@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+    depends_on:
+      - backend
+
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
+      - ML_SERVICE_URL=http://ml_service:8000
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/screening_room?schema=public
+    depends_on:
+      postgres:
+        condition: service_started
+      ml_service:
+        condition: service_started
+
+  ml_service:
+    build:
+      context: ./ml_service
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models_bert:/app/models_bert
+      - ./models_lstm:/app/models_lstm
+      - ./models_ml:/app/models_ml
+      - ./data:/app/data
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=screening_room
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

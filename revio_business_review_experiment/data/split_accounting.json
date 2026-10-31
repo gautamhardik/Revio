@@ -1,0 +1,21 @@
+{
+  "dataset_id": "fancyzhx/yelp_polarity",
+  "seed": 42,
+  "train_samples": 9600,
+  "val_samples": 2400,
+  "test_samples": 3000,
+  "class_distribution": {
+    "train": {
+      "0": 4800,
+      "1": 4800
+    },
+    "val": {
+      "0": 1200,
+      "1": 1200
+    },
+    "test": {
+      "0": 1500,
+      "1": 1500
+    }
+  }
+}

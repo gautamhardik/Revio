@@ -1,0 +1,9 @@
+id,domain,true_label,predicted_consensus,agreement,needs_human_review,triage_action,correct,text
+TE-01,TenantEase,Negative,Negative,3/3,True,ESCALATE (Negative Review / Risk),True,The AC unit has been leaking for two weeks and maintenance keeps closing my ticket without fixing it.
+TE-02,TenantEase,Positive,Positive,3/3,False,AUTO-ACKNOWLEDGE (High-Confidence Positive),True,"Move-in was seamless, rent autopay works great, and the property manager resolved our plumbing issue in an hour."
+TE-03,TenantEase,Negative,Negative,2/3,True,ESCALATE (Disagreement / Ambiguity),True,"Great location near the metro, but management raised the renewal rent by 18% with zero upgrades to the noisy hallway."
+TE-04,TenantEase,Positive,Positive,3/3,False,AUTO-ACKNOWLEDGE (High-Confidence Positive),True,"Quiet building, clean amenities, and transparent lease renewal terms. Very happy living here."
+RV-01,Revio,Negative,Negative,3/3,True,ESCALATE (Negative Review / Risk),True,Waited 45 minutes for cold food and the staff brushed off our complaint. Definitely not worth the price.
+RV-02,Revio,Positive,Positive,2/3,True,ESCALATE (Disagreement / Ambiguity),True,Exceptional customer support! The team went above and beyond to replace our damaged order the same day.
+RV-03,Revio,Negative,Negative,3/3,True,ESCALATE (Negative Review / Risk),True,"The dashboard looks sleek on the surface, yet it crashes every time we export monthly billing logs."
+RV-04,Revio,Positive,Positive,3/3,False,AUTO-ACKNOWLEDGE (High-Confidence Positive),True,Solid onboarding experience and helpful documentation. Saved our operations team hours every week.

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Screening Room - Inside the Screening Room</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Space+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="marquee-border top-marquee">
+        <div class="lights"></div>
+    </div>
+
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="index.html" class="nav-logo" aria-label="Home">
+                    <img src="film_reel.png" class="film-reel-icon" alt="The Screening Room Logo">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Analyze</a>
+                <span class="nav-divider">|</span>
+                <a href="inside.html" class="nav-link active">Inside the Screening Room</a>
+                <span class="nav-divider">|</span>
+                <a href="https://github.com" class="nav-link" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SECTION 1: Hero -->
+    <section class="inside-hero">
+        <div class="hero-projector"></div>
+        <div class="hero-content">
+            <h1>Inside the Screening Room</h1>
+            <p>Discover how three independent AI models analyze the same movie review, explore the technology behind the platform, and learn how The Screening Room brings machine learning and modern software engineering together.</p>
+        </div>
+    </section>
+
+    <!-- SECTION 2: Meet the Critics -->
+    <section class="section-container">
+        <h2 class="section-title">Meet the Critics <span class="star-icon">⭐</span></h2>
+        
+        <div class="critics-grid inside-critics">
+            <!-- The Statistician -->
+            <div class="critic-card" id="criticLr">
+                <div class="critic-header">
+                    <h4>The Statistician</h4>
+                    <span class="model-type">Logistic Regression + TF-IDF</span>
+                </div>
+                <div class="critic-body">
+                    <p class="critic-desc">The Statistician evaluates a review by measuring how strongly individual words and phrases indicate positive or negative sentiment. It provides a fast, reliable baseline and is highly interpretable.</p>
+                    <div class="critic-strengths">
+                        <h5>Strengths</h5>
+                        <ul>
+                            <li>Extremely fast inference</li>
+                            <li>Easy to interpret</li>
+                            <li>Strong traditional machine learning baseline</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Contextualist -->
+            <div class="critic-card" id="criticBert">
+                <div class="critic-header">
+                    <h4>The Contextualist</h4>
+                    <span class="model-type">BERT</span>
+                </div>
+                <div class="critic-body">
+                    <p class="critic-desc">The Contextualist reads every word in relation to every other word, allowing it to understand context, nuanced language, and complex sentence structures.</p>
+                    <div class="critic-strengths">
+                        <h5>Strengths</h5>
+                        <ul>
+                            <li>Context-aware</li>
+                            <li>Handles nuanced language</li>
+                            <li>Strong performance on complex reviews</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Sequentialist -->
+            <div class="critic-card" id="criticLstm">
+                <div class="critic-header">
+                    <h4>The Sequentialist</h4>
+                    <span class="model-type">Bi-LSTM</span>
+                </div>
+                <div class="critic-body">
+                    <p class="critic-desc">The Sequentialist processes each review in order, learning how meaning develops across a sentence. It captures long-term dependencies and contextual flow within the text.</p>
+                    <div class="critic-strengths">
+                        <h5>Strengths</h5>
+                        <ul>
+                            <li>Understands sentence order</li>
+                            <li>Learns contextual sequences</li>
+                            <li>Captures long-range dependencies</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: How It Works -->
+    <section class="section-container">
+        <h2 class="section-title">How It Works</h2>
+        <div class="pipeline-container">
+            <div class="pipeline-step">
+                <div class="step-title">User Review</div>
+                <div class="step-desc">User submits a movie review.</div>
+            </div>
+            <div class="pipeline-arrow">↓</div>
+            <div class="pipeline-step">
+                <div class="step-title">Model-specific Preprocessing</div>
+                <div class="step-desc">Each model receives text prepared according to its own preprocessing pipeline.</div>
+            </div>
+            <div class="pipeline-arrow">↓</div>
+            <div class="pipeline-step">
+                <div class="step-title">Parallel Inference</div>
+                <div class="step-desc">Logistic Regression, Bi-LSTM, and BERT run independently.</div>
+            </div>
+            <div class="pipeline-arrow">↓</div>
+            <div class="pipeline-step">
+                <div class="step-title">Prediction Standardization</div>
+                <div class="step-desc">Outputs from all models are converted into one consistent response format.</div>
+            </div>
+            <div class="pipeline-arrow">↓</div>
+            <div class="pipeline-step">
+                <div class="step-title">Majority Decision</div>
+                <div class="step-desc">The application compares predictions and determines the overall verdict.</div>
+            </div>
+            <div class="pipeline-arrow">↓</div>
+            <div class="pipeline-step">
+                <div class="step-title">Frontend Rendering</div>
+                <div class="step-desc">Predictions, confidence scores, and model insights are displayed simultaneously.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: Project Details -->
+    <section class="section-container">
+        <h2 class="section-title">Project Details</h2>
+        
+        <div class="accordion">
+            <!-- Performance -->
+            <div class="accordion-item active">
+                <button class="accordion-header" aria-expanded="true">
+                    <span>Performance</span>
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-content" style="max-height: 1000px;">
+                    <div class="table-container">
+                        <table class="tech-table">
+                            <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>Accuracy</th>
+                                    <th>Precision</th>
+                                    <th>Recall</th>
+                                    <th>F1</th>
+                                    <th>Inference</th>
+                                </tr>
+                            </thead>
+                            <tbody id="metricsTableBody">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                        <p class="table-caption">Metrics are reported using the final evaluation performed on the held-out IMDb test dataset.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dataset -->
+            <div class="accordion-item">
+                <button class="accordion-header" aria-expanded="false">
+                    <span>Dataset</span>
+                    <span class="accordion-icon">▶</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="dataset-grid">
+                        <div class="dataset-stats">
+                            <h3>IMDb Large Movie Review Dataset</h3>
+                            <div class="code-block">
+                                50,000 Reviews<br>
+                                25,000 Positive<br>
+                                25,000 Negative<br>
+                                Balanced Dataset
+                            </div>
+                            <p>The models were trained and evaluated using the IMDb Large Movie Review Dataset, a widely used benchmark for binary sentiment classification introduced by Andrew L. Maas and colleagues.</p>
+                        </div>
+                        <div class="dataset-attribution">
+                            <h3>Dataset Attribution</h3>
+                            <p><strong>Dataset:</strong> IMDb Large Movie Review Dataset</p>
+                            <p><strong>Authors:</strong> Andrew L. Maas et al.</p>
+                            <p><strong>Institution:</strong> Stanford AI Lab</p>
+                            <p><strong>Official Source:</strong> <a href="https://ai.stanford.edu/~amaas/data/sentiment/" target="_blank">https://ai.stanford.edu/~amaas/data/sentiment/</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technology Stack -->
+            <div class="accordion-item">
+                <button class="accordion-header" aria-expanded="false">
+                    <span>Technology Stack</span>
+                    <span class="accordion-icon">▶</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="tech-grid">
+                        <div class="tech-card">
+                            <h4>Frontend</h4>
+                            <ul>
+                                <li>HTML</li>
+                                <li>CSS</li>
+                                <li>JavaScript</li>
+                            </ul>
+                        </div>
+                        <div class="tech-card">
+                            <h4>Backend</h4>
+                            <ul>
+                                <li>Express.js</li>
+                                <li>FastAPI</li>
+                            </ul>
+                        </div>
+                        <div class="tech-card">
+                            <h4>Machine Learning</h4>
+                            <ul>
+                                <li>Scikit-learn</li>
+                                <li>TensorFlow / Keras</li>
+                                <li>Hugging Face Transformers</li>
+                            </ul>
+                        </div>
+                        <div class="tech-card">
+                            <h4>Deployment</h4>
+                            <ul>
+                                <li>Docker</li>
+                                <li>Render</li>
+                                <li>Neon PostgreSQL</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Architecture -->
+            <div class="accordion-item">
+                <button class="accordion-header" aria-expanded="false">
+                    <span>Architecture</span>
+                    <span class="accordion-icon">▶</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="pipeline-container architecture-flow">
+                        <div class="pipeline-step">Browser</div>
+                        <div class="pipeline-arrow">↓</div>
+                        <div class="pipeline-step">Express Backend</div>
+                        <div class="pipeline-arrow">↓</div>
+                        <div class="pipeline-step">FastAPI ML Service</div>
+                        <div class="pipeline-arrow">↓</div>
+                        <div class="pipeline-step">Prediction Engine</div>
+                        <div class="pipeline-arrow">↓</div>
+                        <div class="pipeline-step">Three Models</div>
+                        <div class="pipeline-arrow">↓</div>
+                        <div class="pipeline-step">Standardized Response</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: Behind the Build -->
+    <section class="section-container">
+        <h2 class="section-title">Behind the Build ⭐</h2>
+        
+        <div class="accordion">
+            <div class="accordion-item">
+                <button class="accordion-header" aria-expanded="false">
+                    <span>Engineering Decisions</span>
+                    <span class="accordion-icon">▶</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="engineering-decision">
+                        <h4>Why FastAPI?</h4>
+                        <p>FastAPI powers the machine learning inference service because it provides high-performance APIs while integrating naturally with Python-based ML libraries.</p>
+                    </div>
+                    <div class="engineering-decision">
+                        <h4>Why Express?</h4>
+                        <p>Express separates application logic from machine learning inference by handling validation, routing, persistence, and API orchestration.</p>
+                    </div>
+                    <div class="engineering-decision">
+                        <h4>Why PostgreSQL?</h4>
+                        <p>PostgreSQL stores prediction history and model metadata using a relational schema to demonstrate production-style persistence.</p>
+                    </div>
+                    <div class="engineering-decision">
+                        <h4>Why Three Models?</h4>
+                        <p>The goal is not only to predict sentiment but also to compare how fundamentally different NLP approaches interpret the same review.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header" aria-expanded="false">
+                    <span>Challenges</span>
+                    <span class="accordion-icon">▶</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="table-container">
+                        <table class="tech-table challenges-table">
+                            <thead>
+                                <tr>
+                                    <th>Challenge</th>
+                                    <th>Solution</th>
+                                    <th>Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Different preprocessing requirements</td>
+                                    <td>Model-specific preprocessing pipeline</td>
+                                    <td>Consistent and reliable predictions</td>
+                                </tr>
+                                <tr>
+                                    <td>Three incompatible prediction outputs</td>
+                                    <td>Unified response schema</td>
+                                    <td>Common API contract across all models</td>
+                                </tr>
+                                <tr>
+                                    <td>Large BERT model</td>
+                                    <td>Singleton loading during application startup</td>
+                                    <td>Reduced inference overhead after initialization</td>
+                                </tr>
+                                <tr>
+                                    <td>Different confidence formats</td>
+                                    <td>Standardized prediction response</td>
+                                    <td>Consistent frontend rendering</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: Future Improvements -->
+    <section class="section-container">
+        <h2 class="section-title">Future Improvements</h2>
+        
+        <div class="future-grid">
+            <div class="future-card">
+                <div class="future-header">
+                    <h4>Multilingual Reviews</h4>
+                    <span class="badge planned">Planned</span>
+                </div>
+                <p>Support additional languages beyond English.</p>
+            </div>
+            
+            <div class="future-card">
+                <div class="future-header">
+                    <h4>Batch Analysis</h4>
+                    <span class="badge planned">Planned</span>
+                </div>
+                <p>Analyze multiple reviews simultaneously.</p>
+            </div>
+            
+            <div class="future-card">
+                <div class="future-header">
+                    <h4>Additional Transformer Models</h4>
+                    <span class="badge future">Future</span>
+                </div>
+                <p>Compare more state-of-the-art NLP models.</p>
+            </div>
+            
+            <div class="future-card">
+                <div class="future-header">
+                    <h4>Mobile Experience</h4>
+                    <span class="badge future">Future</span>
+                </div>
+                <p>Responsive mobile-first interface.</p>
+            </div>
+            
+            <div class="future-card">
+                <div class="future-header">
+                    <h4>Advanced Model Interpretation</h4>
+                    <span class="badge research">Research</span>
+                </div>
+                <p>Expand interpretation techniques for deeper insight into model behavior.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <h4>The Screening Room</h4>
+            <p>Three Critics.<br>One Review.<br>Three Perspectives.</p>
+        </div>
+    </footer>
+
+    <script src="inside.js"></script>
+</body>
+</html>

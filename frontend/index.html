@@ -1,0 +1,2587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revio — Review Intelligence</title>
+  <meta name="description" content="Turn customer reviews into clear insights. Understand sentiment, uncover recurring problems, and know what deserves attention.">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Revio Design Tokens & Styles -->
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/revio-app.css">
+</head>
+<body>
+  <!-- Global Living Ambient Particle & Wave Canvas (ThreeUI Inspired) -->
+  <canvas id="globalAmbientCanvas" class="revio-global-ambient-canvas"></canvas>
+
+  <!-- ======================================================================
+       01 — PUBLIC MARKETING LANDING PAGE (Screen 01)
+       ====================================================================== -->
+  <div id="view-landing" class="revio-landing-wrap">
+    <!-- Top Dark Hero Backdrop (Fold 1) -->
+    <div class="revio-landing-hero-backdrop">
+      <!-- Landing Navigation Matching Target Design -->
+      <header class="revio-landing-nav">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <a href="#landing" class="revio-brand" style="padding: 0; display: inline-flex; align-items: center; gap: 8px;">
+            <svg class="revio-sparkle-brand" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z"/>
+            </svg>
+            <span style="font-weight: 700; font-size: 19px; letter-spacing: -0.02em; color: #FFFFFF;">Revio</span>
+          </a>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="revio-theme-toggle-btn" id="landingThemeBtn" onclick="toggleTheme()" title="Toggle appearance">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Split Hero Section (Refined Two-Column Composition) -->
+      <main class="revio-hero-split-section">
+        <div class="revio-hero-col-left">
+          <div class="revio-hero-eyebrow" style="color: #F59E0B;">
+            INTERACTIVE REVIEW SANDBOX
+          </div>
+          <h1 class="revio-hero-headline">
+            Test the Signal<br>in <span class="revio-headline-italic">Real-Time</span>
+          </h1>
+          <p class="revio-hero-desc">
+            Choose a customer review or write your own. See how Revio understands sentiment, identifies the words that influenced its prediction, and highlights feedback that deserves attention.
+          </p>
+
+          <!-- 4-Stage Connected Workflow Cards (Exact Match to Hero Reference) -->
+          <div class="revio-hero-workflow-flow">
+            <!-- 1. Analyse -->
+            <div class="revio-workflow-card" onclick="focusPlaygroundInput()" title="Review text ingestion">
+              <span class="revio-wf-icon-wrap amber">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </span>
+              <div class="revio-wf-text">
+                <strong class="revio-wf-title">Analyse</strong>
+                <span class="revio-wf-sub">Review text</span>
+              </div>
+            </div>
+
+            <span class="revio-wf-arrow" aria-hidden="true">&rarr;</span>
+
+            <!-- 2. Understand -->
+            <div class="revio-workflow-card" onclick="focusPlaygroundInput()" title="Fast-path polarity classification">
+              <span class="revio-wf-icon-wrap violet">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              </span>
+              <div class="revio-wf-text">
+                <strong class="revio-wf-title">Understand</strong>
+                <span class="revio-wf-sub">Key signals</span>
+              </div>
+            </div>
+
+            <span class="revio-wf-arrow" aria-hidden="true">&rarr;</span>
+
+            <!-- 3. Explain -->
+            <div class="revio-workflow-card active" onclick="scrollToTokens()" title="Transparent feature attributions">
+              <span class="revio-wf-icon-wrap blue">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              </span>
+              <div class="revio-wf-text">
+                <strong class="revio-wf-title">Explain</strong>
+                <span class="revio-wf-sub">Feature attributions</span>
+              </div>
+            </div>
+
+            <span class="revio-wf-arrow" aria-hidden="true">&rarr;</span>
+
+            <!-- 4. Triage -->
+            <div class="revio-workflow-card" onclick="scrollToTriage()" title="Automated operations triage">
+              <span class="revio-wf-icon-wrap emerald">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </span>
+              <div class="revio-wf-text">
+                <strong class="revio-wf-title">Triage</strong>
+                <span class="revio-wf-sub">Actionable insights</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Procedural 3D WebGL Glass Core + Non-Overlapping Callouts + Vertical Pipeline Stepper -->
+        <div class="revio-hero-col-right">
+          <div class="revio-hero-canvas-stage" id="hero3dContainer">
+            <canvas id="revioHeroCanvas" class="revio-hero-3d-canvas"></canvas>
+            <div class="revio-hero-ambient-glow"></div>
+
+            <!-- Non-Overlapping Floating Sentiment Callout Cards (Target Layout) -->
+            <div class="revio-callout-pill revio-callout-pos" onclick="selectPlaygroundPreset(1)" title="Load positive sample review">
+              <div class="revio-callout-head">
+                <span class="revio-callout-dot pos"></span>
+                <strong>Positive</strong>
+              </div>
+              <span class="revio-callout-body">"Penthouse upgrade and free champagne!"</span>
+            </div>
+
+            <div class="revio-callout-pill revio-callout-mixed" onclick="selectPlaygroundPreset(0)" title="Load sample review">
+              <div class="revio-callout-head">
+                <span class="revio-callout-dot mixed"></span>
+                <strong>Mixed</strong>
+              </div>
+              <span class="revio-callout-body">"Good place, but delivery took 50 mins..."</span>
+            </div>
+
+            <div class="revio-callout-pill revio-callout-neg" onclick="selectPlaygroundPreset(2)" title="Load negative sample review">
+              <div class="revio-callout-head">
+                <span class="revio-callout-dot neg"></span>
+                <strong>Negative</strong>
+              </div>
+              <span class="revio-callout-body">"AC leaked on luggage, staff refused refund."</span>
+            </div>
+
+            <!-- Vertical Pipeline Stepper (Aligned on right edge) -->
+            <div class="revio-vertical-stepper" aria-label="Analysis pipeline steps">
+              <div class="revio-vstep-track"></div>
+              <div class="revio-vstep" onclick="focusPlaygroundInput()" title="1. Review ingestion and input">
+                <span class="revio-vstep-text">ANALYSE</span>
+              </div>
+              <div class="revio-vstep" onclick="focusPlaygroundInput()" title="2. Fast-path sentiment classification">
+                <span class="revio-vstep-text">UNDERSTAND</span>
+              </div>
+              <div class="revio-vstep active" onclick="scrollToTokens()" title="3. Transparent feature attributions">
+                <span class="revio-vstep-text">EXPLAIN</span>
+                <span class="revio-vstep-dot"></span>
+              </div>
+              <div class="revio-vstep" onclick="scrollToTriage()" title="4. Automated triage routing">
+                <span class="revio-vstep-text">TRIAGE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div> <!-- .revio-landing-hero-backdrop -->
+
+  <!-- Warm Studio Stage & Lower Platform Architecture (Consistent Theme Canvas) -->
+  <div class="revio-landing-stage-wrap">
+    <!-- ==================================================================
+         WARM STUDIO STAGE (Consistent Theme Canvas)
+         ================================================================== -->
+    <section class="revio-studio-stage" id="revioStudioStage">
+      <div class="revio-studio-stage-inner">
+
+        <!-- Stage Header (Matching Target Mockup) -->
+        <div class="revio-stage-header">
+          <h2 class="revio-stage-title">Try an example review</h2>
+          <p class="revio-stage-subtitle">Click a sample review below to see how Revio analyses it, or write your own.</p>
+        </div>
+
+        <!-- Horizontal Preset Track (4 Cards, Responsive Grid & Carousel) -->
+        <div class="revio-presets-track" id="playgroundPresetsTrack" role="region" aria-label="Sample review selection">
+          <!-- Card 0: Dining / Pizza -->
+          <button class="revio-preset-card active" onclick="selectPlaygroundPreset(0)" aria-selected="true" tabindex="0">
+            <span class="revio-preset-card-icon" title="Dining &amp; Restaurant">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2v20M2 2v10c0 2 2 4 4 4s4-2 4-4V2M6 2v20"/></svg>
+            </span>
+            <div class="revio-preset-card-body">
+              <span class="revio-preset-category">Dining / Pizza</span>
+              <span class="revio-preset-quote">&ldquo;Steaming pizza, but delivery took 50 mins...&rdquo;</span>
+            </div>
+            <div class="revio-preset-card-right">
+              <span class="revio-preset-badge mixed">MIXED</span>
+              <span class="revio-preset-arrow-btn" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+              </span>
+            </div>
+          </button>
+
+          <!-- Card 1: Hospitality / Hotel -->
+          <button class="revio-preset-card" onclick="selectPlaygroundPreset(1)" aria-selected="false" tabindex="0">
+            <span class="revio-preset-card-icon" title="Hospitality &amp; Hotel">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/></svg>
+            </span>
+            <div class="revio-preset-card-body">
+              <span class="revio-preset-category">Hospitality / Hotel</span>
+              <span class="revio-preset-quote">&ldquo;Penthouse upgrade and free champagne!&rdquo;</span>
+            </div>
+            <div class="revio-preset-card-right">
+              <span class="revio-preset-badge pos">POSITIVE</span>
+              <span class="revio-preset-arrow-btn" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+              </span>
+            </div>
+          </button>
+
+          <!-- Card 2: Travel / Facilities -->
+          <button class="revio-preset-card" onclick="selectPlaygroundPreset(2)" aria-selected="false" tabindex="0">
+            <span class="revio-preset-card-icon" title="Travel &amp; Facilities">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </span>
+            <div class="revio-preset-card-body">
+              <span class="revio-preset-category">Travel / Facilities</span>
+              <span class="revio-preset-quote">&ldquo;AC leaked on luggage, staff refused refund.&rdquo;</span>
+            </div>
+            <div class="revio-preset-card-right">
+              <span class="revio-preset-badge neg">NEGATIVE</span>
+              <span class="revio-preset-arrow-btn" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+              </span>
+            </div>
+          </button>
+
+          <!-- Card 3: Cafe / Ambiguous -->
+          <button class="revio-preset-card" onclick="selectPlaygroundPreset(3)" aria-selected="false" tabindex="0">
+            <span class="revio-preset-card-icon" title="Cafe &amp; Ambiguous">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+            </span>
+            <div class="revio-preset-card-body">
+              <span class="revio-preset-category">Cafe / Ambiguous</span>
+              <span class="revio-preset-quote">&ldquo;Quiet cafe, great latte, exorbitant parking.&rdquo;</span>
+            </div>
+            <div class="revio-preset-card-right">
+              <span class="revio-preset-badge mixed">MIXED</span>
+              <span class="revio-preset-arrow-btn" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+              </span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Two-Card Live Inference Workspace Grid (Exact Target Match) -->
+        <div class="revio-workspace-grid">
+          <!-- Left Card: Customer review -->
+          <div class="revio-workspace-card">
+            <div class="revio-workspace-head">
+              <div class="revio-workspace-title-group">
+                <span class="revio-workspace-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </span>
+                <h3 class="revio-workspace-title">Customer review</h3>
+              </div>
+              <div class="revio-model-spec-pill" title="Pre-warmed in-memory Logistic Regression pipeline">
+                <span>Logistic Regression &middot; Word + Char N-Grams</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              </div>
+            </div>
+            <p class="revio-workspace-helper">Type or edit a customer review below, or select a sample above to test model inference.</p>
+
+            <div class="revio-workspace-textarea-wrap">
+              <textarea id="playgroundInput" class="revio-workspace-textarea" rows="4" placeholder="Type or paste any customer review to analyze signal...">The pizza arrived steaming hot and crispy, but the delivery driver took fifty minutes and forgot our dipping sauce.</textarea>
+              <button class="revio-clear-input-btn" onclick="clearPlaygroundText()" title="Clear input text" aria-label="Clear text">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+              <span class="revio-workspace-char-counter" id="playgroundCharCounter">115 / 500</span>
+            </div>
+
+            <div class="revio-workspace-actions-row">
+              <button class="revio-btn-analyse-primary" onclick="submitPlaygroundReview()" id="btnPlaygroundRun" title="Submit review to live inference API">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
+                <span>Analyse review</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+              <button class="revio-btn-randomize-secondary" onclick="randomizePlaygroundPreset()" title="Cycle to next sample review">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+                <span>Try another example</span>
+              </button>
+            </div>
+
+            <div class="revio-workspace-footer">
+              <div class="revio-workspace-footer-links">
+                <button class="revio-footer-link-btn" onclick="scrollToPresets()" title="View example presets">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                  <span>Examples</span>
+                </button>
+                <button class="revio-footer-link-btn" onclick="clearPlaygroundText()" title="Clear text">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                  <span>Clear text</span>
+                </button>
+              </div>
+              <div class="revio-workspace-latency" title="Measured client-to-API round-trip response time">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>API Round-Trip: <strong id="playgroundLatencyVal">276.2 ms</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Card: Analysis result -->
+          <div class="revio-workspace-card">
+            <div class="revio-workspace-head">
+              <div class="revio-workspace-title-group">
+                <span class="revio-workspace-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                </span>
+                <h3 class="revio-workspace-title">Analysis result</h3>
+              </div>
+              <span class="revio-badge-sentiment-pill neg" id="playgroundSentimentBadge">
+                <span class="revio-sentiment-indicator-dot" id="playgroundDot"></span>
+                <span id="playgroundSentimentText">NEGATIVE &middot; 0.61</span>
+              </span>
+            </div>
+
+            <!-- Subcard 1: Class probability -->
+            <div class="revio-sub-card">
+              <div class="revio-subcard-head">
+                <span class="revio-subcard-title">
+                  <span>Positive-class probability (Logistic Regression)</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="cursor:help;" title="Positive-class probability estimated via Logistic Regression sigmoid function"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                </span>
+              </div>
+              <div class="revio-prob-meta-top">
+                <span id="probLabelNeg">P(Negative)</span>
+                <span id="probLabelPos">P(Positive)</span>
+              </div>
+              <div class="revio-prob-split-bar">
+                <div class="revio-prob-fill-neg" id="probFillNeg" style="width: 60.8%;"></div>
+                <div class="revio-prob-fill-pos" id="probFillPos" style="width: 39.2%;"></div>
+                <div class="revio-prob-threshold-marker" style="left: 48%;"></div>
+              </div>
+              <div class="revio-prob-numbers-row">
+                <span class="revio-prob-num-neg" id="probValLargeNeg">60.8%</span>
+                <div class="revio-prob-threshold-box">
+                  <span class="revio-prob-thresh-title">Decision threshold</span>
+                  <span class="revio-prob-thresh-val">48.0%</span>
+                </div>
+                <span class="revio-prob-num-pos" id="probValLargePos">39.2%</span>
+              </div>
+              <p class="revio-prob-narrative" id="playgroundExplanationText">
+                Classified by <strong>Logistic Regression (Word + Char N-Grams)</strong>. Polarity falls below the operational decision threshold (48.0%), automatically escalating for complaint triage.
+              </p>
+            </div>
+
+            <!-- Subcard 2: Feature Attribution (Split Grid: Neg left, Pos right) -->
+            <div class="revio-sub-card">
+              <div class="revio-subcard-head">
+                <div class="revio-attr-head-left">
+                  <span>What influenced this prediction</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="cursor:help;" title="Raw linear log-odds feature contributions: TF-IDF values multiplied by Logistic Regression beta weights (X_j * beta_j)"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                </div>
+                <span class="revio-attr-model-tag">Logistic Regression (TF-IDF &times; &beta;)</span>
+              </div>
+              <div class="revio-attr-split-grid">
+                <!-- Negative column -->
+                <div class="revio-attr-column">
+                  <div class="revio-attr-col-head">
+                    <span class="revio-attr-col-dot neg"></span>
+                    <span>Negative contributors</span>
+                  </div>
+                  <div class="revio-attr-chips-list" id="playgroundTokensNeg">
+                    <span class="revio-token-chip neg" title="Weight: -0.21"><span>but the</span><strong>-0.21</strong></span>
+                    <span class="revio-token-chip neg" title="Weight: -0.13"><span>minutes</span><strong>-0.13</strong></span>
+                    <span class="revio-token-chip neg" title="Weight: -0.10"><span>the pizza</span><strong>-0.10</strong></span>
+                    <span class="revio-token-chip neg" title="Weight: -0.08"><span>dipping sauce</span><strong>-0.08</strong></span>
+                    <span class="revio-token-chip neg" title="Weight: -0.07"><span>took</span><strong>-0.07</strong></span>
+                  </div>
+                </div>
+                <!-- Positive column -->
+                <div class="revio-attr-column">
+                  <div class="revio-attr-col-head">
+                    <span class="revio-attr-col-dot pos"></span>
+                    <span>Positive contributors</span>
+                  </div>
+                  <div class="revio-attr-chips-list" id="playgroundTokensPos">
+                    <span class="revio-token-chip pos" title="Weight: +0.16"><span>hot</span><strong>+0.16</strong></span>
+                    <span class="revio-token-chip pos" title="Weight: +0.12"><span>and</span><strong>+0.12</strong></span>
+                    <span class="revio-token-chip pos" title="Weight: +0.11"><span>crispy</span><strong>+0.11</strong></span>
+                    <span class="revio-token-chip pos" title="Weight: +0.09"><span>good</span><strong>+0.09</strong></span>
+                    <span class="revio-token-chip pos" title="Weight: +0.08"><span>arrived</span><strong>+0.08</strong></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Subcard 3: Triage Alert Box -->
+            <div class="revio-triage-alert-box" id="playgroundTriageCard">
+              <div class="revio-triage-main">
+                <svg class="revio-triage-warning-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <div class="revio-triage-text-body">
+                  <div class="revio-triage-title-tag" id="playgroundTriageAction">ESCALATE (NEGATIVE / HIGH RISK)</div>
+                  <p class="revio-triage-explanation" id="playgroundTriageReason">Operational friction or confidence ambiguity detected. Review routed to operations inbox for human review.</p>
+                </div>
+              </div>
+              <button class="revio-btn-add-inbox" onclick="addPlaygroundToInbox()" title="Add this review into Review Inbox">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+                <span>Add to inbox</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Expanded Commercial CTA Banner (Exact Match to media_1793405134616_f42965c2.jpg) -->
+        <div class="revio-banner-card-expanded">
+          <!-- Left Column: Content & Features -->
+          <div class="revio-banner-content-left">
+            <span class="revio-banner-badge">GET STARTED</span>
+            <h3 class="revio-banner-hero-title">
+              Ready to understand<br>
+              <span>your customer feedback?</span>
+            </h3>
+            <p class="revio-banner-subtext">
+              Upload your reviews or explore the sample dataset to see how Revio analyses sentiment, explains key signals, and routes feedback to the right team.
+            </p>
+
+            <div class="revio-banner-features-row">
+              <!-- Feature 1: Upload reviews -->
+              <div class="revio-banner-feat-item" onclick="navigateTo('import')" role="button" tabindex="0" title="Upload your reviews from CSV or text file">
+                <div class="revio-feat-icon purple">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/>
+                  </svg>
+                </div>
+                <div class="revio-feat-text">
+                  <strong>Upload your reviews</strong>
+                  <span>CSV or text file</span>
+                </div>
+              </div>
+
+              <!-- Feature 2: Sample dataset -->
+              <div class="revio-banner-feat-item" onclick="scrollToPresets()" role="button" tabindex="0" title="Explore pre-loaded reviews">
+                <div class="revio-feat-icon amber">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="4" cy="6" r="1.5" fill="currentColor"/><circle cx="4" cy="12" r="1.5" fill="currentColor"/><circle cx="4" cy="18" r="1.5" fill="currentColor"/>
+                  </svg>
+                </div>
+                <div class="revio-feat-text">
+                  <strong>Use sample dataset</strong>
+                  <span>Pre-loaded reviews</span>
+                </div>
+              </div>
+
+              <!-- Feature 3: Real analysis -->
+              <div class="revio-banner-feat-item" onclick="scrollToTokens()" role="button" tabindex="0" title="See sentiment, explanations and triage">
+                <div class="revio-feat-icon blue">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z"/>
+                  </svg>
+                </div>
+                <div class="revio-feat-text">
+                  <strong>See real analysis</strong>
+                  <span>Sentiment, explanations and triage</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Center Column: 3D Visual Stack & Glowing Orb Backdrop -->
+          <div class="revio-banner-center-visual" aria-hidden="true">
+            <div class="revio-banner-orb-backdrop">
+              <div class="revio-banner-orb-sphere"></div>
+              <div class="revio-banner-orb-ring"></div>
+              <div class="revio-banner-pearl p1"></div>
+              <div class="revio-banner-pearl p2"></div>
+            </div>
+
+            <div class="revio-banner-cards-stack">
+              <!-- Stack Card 1: Positive -->
+              <div class="revio-stack-card" onclick="selectPlaygroundPreset(1)" title="Load positive review">
+                <div class="revio-stack-card-head">
+                  <div class="revio-stack-card-left">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><circle cx="9" cy="9" r="1" fill="#10B981"/><circle cx="15" cy="9" r="1" fill="#10B981"/></svg>
+                    <span class="revio-stack-card-text">&ldquo;Amazing food and friendly staff!&rdquo;</span>
+                  </div>
+                  <span class="revio-stack-badge pos">POSITIVE</span>
+                </div>
+                <div class="revio-stack-skeleton">
+                  <div class="revio-skel-line long"></div>
+                  <div class="revio-skel-line short"></div>
+                </div>
+              </div>
+
+              <!-- Stack Card 2: Mixed -->
+              <div class="revio-stack-card" onclick="selectPlaygroundPreset(0)" title="Load sample review">
+                <div class="revio-stack-card-head">
+                  <div class="revio-stack-card-left">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="8" y1="15" x2="16" y2="15"/><circle cx="9" cy="9" r="1" fill="#F59E0B"/><circle cx="15" cy="9" r="1" fill="#F59E0B"/></svg>
+                    <span class="revio-stack-card-text">&ldquo;Good place, but delivery took 50 mins...&rdquo;</span>
+                  </div>
+                  <span class="revio-stack-badge mixed">MIXED</span>
+                </div>
+                <div class="revio-stack-skeleton">
+                  <div class="revio-skel-line long"></div>
+                  <div class="revio-skel-line short"></div>
+                </div>
+              </div>
+
+              <!-- Stack Card 3: Negative -->
+              <div class="revio-stack-card" onclick="selectPlaygroundPreset(2)" title="Load negative review">
+                <div class="revio-stack-card-head">
+                  <div class="revio-stack-card-left">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><circle cx="9" cy="9" r="1" fill="#EF4444"/><circle cx="15" cy="9" r="1" fill="#EF4444"/></svg>
+                    <span class="revio-stack-card-text">&ldquo;AC leaked on luggage, staff refused refund.&rdquo;</span>
+                  </div>
+                  <span class="revio-stack-badge neg">NEGATIVE</span>
+                </div>
+                <div class="revio-stack-skeleton">
+                  <div class="revio-skel-line long"></div>
+                  <div class="revio-skel-line short"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: CTA Action Button & Fineprint -->
+          <div class="revio-banner-action-col">
+            <button class="revio-btn-analyse-gradient" onclick="navigateTo('import')" title="Analyse customer reviews">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><line x1="12" y1="12" x2="12" y2="16"/><polyline points="9 15 12 12 15 15"/>
+              </svg>
+              <span>Analyse your reviews &rarr;</span>
+            </button>
+            <p class="revio-banner-fineprint">
+              No credit card required &middot; Try it now with our sample dataset.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         ARCHITECTURE & SIGNALS (Benefit-Oriented & Technically Verified)
+         ================================================================== -->
+    <section class="revio-bento-section">
+      <div class="revio-bento-inner">
+        <div class="revio-bento-header">
+          <span class="revio-pill-badge-outline">ARCHITECTURE &amp; SIGNALS</span>
+          <h2 class="revio-bento-main-title">From customer feedback to meaningful signals</h2>
+          <p class="revio-bento-main-sub">
+            A transparent analysis pipeline that turns review text into evidence, evaluation and actionable attention.
+          </p>
+        </div>
+
+        <div class="revio-bento-grid">
+          <!-- Card 1: Fast, responsive analysis -->
+          <div class="revio-bento-card">
+            <span class="revio-bento-eyebrow">FAST-PATH INFERENCE</span>
+            <h3 class="revio-bento-title">Fast, responsive analysis</h3>
+            <p class="revio-bento-desc">
+              A pre-warmed Logistic Regression pipeline returns sentiment predictions through the live API.
+            </p>
+            <div class="revio-bento-inner-box">
+              <div class="revio-bento-box-head">
+                <span class="revio-bento-box-title">
+                  <span>Measured API Gateway Ping</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="cursor:help;" title="Direct client-to-API ping measurement"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                </span>
+                <button class="revio-btn-test-endpoint" onclick="testLiveLatency(this)" title="Test live latency ping">
+                  <span>Test endpoint</span>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </button>
+              </div>
+              <div class="revio-bento-card1-flex">
+                <div>
+                  <div class="revio-bento-stat" id="livePingStat">12.4 ms</div>
+                  <div class="revio-bento-stat-caption">Actual round-trip time to API gateway (not model inference latency).</div>
+                </div>
+                <div class="revio-arch-flow" aria-label="Request flow architecture">
+                  <div class="revio-arch-node">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    <span>Your request</span>
+                  </div>
+                  <span class="revio-arch-arrow">&rarr;</span>
+                  <div class="revio-arch-node">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                    <span>API gateway</span>
+                  </div>
+                  <span class="revio-arch-arrow">&rarr;</span>
+                  <div class="revio-arch-node">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                    <span>Revio ML service</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Understand the language -->
+          <div class="revio-bento-card">
+            <span class="revio-bento-eyebrow">FEATURE ATTRIBUTION</span>
+            <h3 class="revio-bento-title">Understand the language</h3>
+            <p class="revio-bento-desc">
+              Word and character n-grams help surface the terms that influenced the Logistic Regression prediction.
+            </p>
+            <div class="revio-bento-inner-box">
+              <div class="revio-bento-box-head">
+                <span class="revio-bento-box-title">
+                  <span>Example feature contributions (illustrative)</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="cursor:help;" title="Dual n-gram extraction"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                </span>
+              </div>
+              <div class="revio-bento-attr-row">
+                <div class="revio-bento-attr-item">
+                  <div class="revio-bento-chip pos">
+                    <span>&ldquo;loved it&rdquo;</span>
+                    <strong>+0.28</strong>
+                  </div>
+                  <span class="revio-bento-chip-sub">Positive phrase (word n-gram)</span>
+                </div>
+                <div class="revio-bento-attr-item">
+                  <div class="revio-bento-chip neg">
+                    <span>&ldquo;delayed&rdquo;</span>
+                    <strong>-0.24</strong>
+                  </div>
+                  <span class="revio-bento-chip-sub">Negative term (word n-gram)</span>
+                </div>
+                <div class="revio-bento-attr-item">
+                  <div class="revio-bento-chip pos">
+                    <span>&ldquo;crisp&rdquo;</span>
+                    <strong>+0.16</strong>
+                  </div>
+                  <span class="revio-bento-chip-sub">Positive term (char n-gram)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Model transparency -->
+          <div class="revio-bento-card">
+            <span class="revio-bento-eyebrow">TRANSPARENT EVALUATION</span>
+            <h3 class="revio-bento-title">Model transparency</h3>
+            <p class="revio-bento-desc">
+              Compare model performance with dataset and test-split context.
+            </p>
+            <div class="revio-bento-inner-box">
+              <div class="revio-bento-box-head">
+                <span class="revio-bento-box-title">
+                  <span>Test set accuracy (Yelp Review Polarity)</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="cursor:help;" title="Evaluated on 25,000 held-out Yelp reviews"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                </span>
+              </div>
+              <div class="revio-bento-benchmark-list">
+                <div class="revio-bento-bench-row">
+                  <span class="revio-bench-name">Logistic Regression</span>
+                  <div class="revio-bench-track">
+                    <div class="revio-bench-bar purple" style="width: 92.4%;"></div>
+                  </div>
+                  <span class="revio-bench-val">92.4%</span>
+                </div>
+                <div class="revio-bento-bench-row">
+                  <span class="revio-bench-name">Bi-LSTM</span>
+                  <div class="revio-bench-track">
+                    <div class="revio-bench-bar lavender" style="width: 89.1%;"></div>
+                  </div>
+                  <span class="revio-bench-val">89.1%</span>
+                </div>
+                <div class="revio-bento-bench-row">
+                  <span class="revio-bench-name">DistilBERT</span>
+                  <div class="revio-bench-track">
+                    <div class="revio-bench-bar blue" style="width: 91.2%;"></div>
+                  </div>
+                  <span class="revio-bench-val">91.2%</span>
+                </div>
+              </div>
+              <div class="revio-bento-bench-footer">Yelp Review Polarity &middot; held-out test set &middot; reported benchmark</div>
+            </div>
+          </div>
+
+          <!-- Card 4: Identify what needs attention -->
+          <div class="revio-bento-card">
+            <span class="revio-bento-eyebrow">OPERATIONAL TRIAGE</span>
+            <h3 class="revio-bento-title">Identify what needs attention</h3>
+            <p class="revio-bento-desc">
+              Route feedback into review categories for human inspection.
+            </p>
+            <div class="revio-bento-inner-box">
+              <div class="revio-bento-box-head">
+                <span class="revio-bento-box-title">
+                  <span>Sample evaluation distribution (2,500 reviews)</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="cursor:help;" title="Operational triage categorisation baseline"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                </span>
+              </div>
+              <div class="revio-bento-cat-list">
+                <div class="revio-bento-cat-row">
+                  <div class="revio-cat-name-icon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span>Service Delay</span>
+                  </div>
+                  <div class="revio-cat-track">
+                    <div class="revio-cat-bar amber" style="width: 32%;"></div>
+                  </div>
+                  <span class="revio-cat-val">32%</span>
+                </div>
+                <div class="revio-bento-cat-row">
+                  <div class="revio-cat-name-icon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                    <span>Facility / Product</span>
+                  </div>
+                  <div class="revio-cat-track">
+                    <div class="revio-cat-bar purple" style="width: 26%;"></div>
+                  </div>
+                  <span class="revio-cat-val">26%</span>
+                </div>
+                <div class="revio-bento-cat-row">
+                  <div class="revio-cat-name-icon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                    <span>Billing Inquiries</span>
+                  </div>
+                  <div class="revio-cat-track">
+                    <div class="revio-cat-bar blue" style="width: 22%;"></div>
+                  </div>
+                  <span class="revio-cat-val">22%</span>
+                </div>
+                <div class="revio-bento-cat-row">
+                  <div class="revio-cat-name-icon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <span>Staff Interaction</span>
+                  </div>
+                  <div class="revio-cat-track">
+                    <div class="revio-cat-bar green" style="width: 20%;"></div>
+                  </div>
+                  <span class="revio-cat-val">20%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Professional Minimal Product Footer -->
+    <footer class="revio-page-footer">
+      <div class="revio-footer-left">
+        <svg class="revio-sparkle-brand" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z"/>
+        </svg>
+        <span class="revio-footer-name">Revio</span>
+        <span class="revio-footer-tagline">Review Intelligence Platform</span>
+      </div>
+      <div class="revio-footer-center-links">
+        <a href="#import" onclick="navigateTo('import')">Analyse</a>
+        <a href="#inbox" onclick="navigateTo('inbox')">Review Inbox</a>
+        <a href="#insights" onclick="navigateTo('insights')">Insights</a>
+        <a href="#models" onclick="navigateTo('models')">Model Lab</a>
+        <a href="#models" onclick="navigateTo('models')">Documentation</a>
+        <a href="#settings" onclick="navigateTo('settings')">Privacy</a>
+        <a href="#settings" onclick="navigateTo('settings')">Terms</a>
+      </div>
+      <div class="revio-footer-right">
+        &copy; 2026 Revio. All rights reserved.
+      </div>
+    </footer>
+  </div> <!-- .revio-landing-stage-wrap -->
+  </div> <!-- #view-landing -->
+
+
+  <!-- ======================================================================
+       02–10 — AUTHENTICATED APPLICATION SHELL
+       ====================================================================== -->
+  <div id="view-app-shell" class="revio-layout" style="display: none;">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="revio-sidebar" id="appSidebar">
+      <div class="revio-brand">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" fill="currentColor"/>
+        </svg>
+        <span onclick="navigateTo('landing')" style="cursor: pointer;">Revio</span>
+      </div>
+
+      <nav class="revio-nav">
+        <a href="#import" class="revio-nav-item" data-view="import">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          Analyse
+        </a>
+        <a href="#inbox" class="revio-nav-item" data-view="inbox">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>
+            <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path>
+          </svg>
+          Review Inbox
+        </a>
+        <a href="#insights" class="revio-nav-item" data-view="insights">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          Insights
+        </a>
+        <a href="#models" class="revio-nav-item" data-view="models">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+            <line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line>
+          </svg>
+          Model Lab
+        </a>
+        <a href="#settings" class="revio-nav-item" data-view="settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          Settings
+        </a>
+      </nav>
+
+      <div class="revio-sidebar-footer">
+        <div class="revio-workspace-badge-v2" onclick="showToast('Active Workspace: Demo workspace · Revio Platform', 'info')" role="button" tabindex="0" title="Switch workspace">
+          <div class="revio-workspace-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 9h1M9 13h1M9 17h1M14 9h1M14 13h1M14 17h1"/>
+            </svg>
+          </div>
+          <div class="revio-workspace-info">
+            <div class="revio-workspace-title" id="sidebarWorkspaceLabel">Demo workspace</div>
+            <div class="revio-workspace-sub">Revio Platform</div>
+          </div>
+          <div class="revio-workspace-arrow">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN VIEWPORT -->
+    <div class="revio-main">
+
+      <!-- TOPBAR -->
+      <header class="revio-topbar">
+        <div class="revio-breadcrumb">
+          <span>Revio</span>
+          <span class="revio-breadcrumb-sep">/</span>
+          <span class="revio-breadcrumb-current" id="breadcrumbCurrent">Analyse Reviews</span>
+        </div>
+
+        <div class="revio-topbar-actions">
+          <div class="revio-search-box">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="globalSearchInput" placeholder="Search reviews, topics or keywords...">
+            <span class="revio-kbd">⌘K</span>
+          </div>
+
+          <button class="revio-icon-btn revio-bell-btn" aria-label="Notifications" onclick="showToast('No new notifications', 'info')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="revio-bell-dot"></span>
+          </button>
+
+          <div class="revio-user-avatar">H</div>
+        </div>
+      </header>
+
+      <!-- CONTENT SECTIONS (Shown according to hash route) -->
+      <main class="revio-content">
+
+        <!-- ==============================================================
+             02 — ONBOARDING / IMPORT CHOICE (Screen 02)
+             ============================================================== -->
+        <section id="sec-import" style="display: none;">
+          <!-- Header Hero with 3D Visual Art & Staggered Sentiment Badges (Exact match to Figma/Ref) -->
+          <div class="revio-import-hero">
+            <div class="revio-import-hero-text">
+              <span class="revio-import-eyebrow">IMPORT &amp; ANALYSE</span>
+              <h1 class="revio-import-hero-title">
+                Let's <span class="revio-italic-accent">analyse</span> your reviews
+              </h1>
+              <p class="revio-import-hero-sub">
+                Upload your customer reviews or explore a sample dataset to see how Revio analyses sentiment, explains key signals and identifies feedback that needs attention.
+              </p>
+            </div>
+
+            <!-- Right 3D Visual Art with Stacked Review Preview Badges -->
+            <div class="revio-import-hero-visual" aria-hidden="true">
+              <div class="revio-import-stacked-previews">
+                <!-- Positive Pill -->
+                <div class="revio-import-preview-pill pos">
+                  <div class="revio-preview-pill-face">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><circle cx="9" cy="9" r="1" fill="#10B981"/><circle cx="15" cy="9" r="1" fill="#10B981"/></svg>
+                    <span class="revio-preview-pill-text">&ldquo;Amazing food and friendly staff!&rdquo;</span>
+                  </div>
+                  <span class="revio-preview-pill-badge pos">POSITIVE</span>
+                </div>
+
+                <!-- Mixed Pill -->
+                <div class="revio-import-preview-pill mixed">
+                  <div class="revio-preview-pill-face">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="8" y1="15" x2="16" y2="15"/><circle cx="9" cy="9" r="1" fill="#F59E0B"/><circle cx="15" cy="9" r="1" fill="#F59E0B"/></svg>
+                    <span class="revio-preview-pill-text">&ldquo;Good place, but delivery took 50 mins...&rdquo;</span>
+                  </div>
+                  <span class="revio-preview-pill-badge mixed">MIXED</span>
+                </div>
+
+                <!-- Negative Pill -->
+                <div class="revio-import-preview-pill neg">
+                  <div class="revio-preview-pill-face">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><circle cx="9" cy="9" r="1" fill="#EF4444"/><circle cx="15" cy="9" r="1" fill="#EF4444"/></svg>
+                    <span class="revio-preview-pill-text">&ldquo;AC leaked on luggage, staff refused refund.&rdquo;</span>
+                  </div>
+                  <span class="revio-preview-pill-badge neg">NEGATIVE</span>
+                </div>
+              </div>
+
+              <!-- 3D Document Card with glowing upload box and orbital rings -->
+              <div class="revio-import-doc-art">
+                <div class="revio-import-glow-orb"></div>
+                <div class="revio-import-doc-card">
+                  <div class="revio-doc-inner-badge">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5">
+                      <path d="M12 19V5M5 12l7-7 7 7"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="revio-import-orbit-ring r1"></div>
+                <div class="revio-import-orbit-ring r2"></div>
+                <div class="revio-import-pearl p1"></div>
+                <div class="revio-import-pearl p2"></div>
+                <div class="revio-import-pearl p3"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 Choice Option Cards (Upload CSV, Paste text, Try a sample) -->
+          <div class="revio-import-grid">
+            <!-- Choice 1: Upload CSV -->
+            <div class="revio-choice-card selected" data-choice="csv" role="button" tabindex="0">
+              <div class="revio-choice-header-row">
+                <div class="revio-choice-icon purple">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                  </svg>
+                </div>
+                <div class="revio-choice-titles">
+                  <div class="revio-choice-title">Upload CSV</div>
+                  <div class="revio-choice-desc">Analyse multiple reviews at once</div>
+                </div>
+                <div class="revio-choice-chevron">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </div>
+              <ul class="revio-choice-checklist">
+                <li>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Best for bulk analysis</span>
+                </li>
+                <li>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Supports up to 10MB</span>
+                </li>
+                <li>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Optional metadata columns</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Choice 2: Paste text -->
+            <div class="revio-choice-card" data-choice="text" role="button" tabindex="0">
+              <div class="revio-choice-header-row">
+                <div class="revio-choice-icon soft-blue">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
+                </div>
+                <div class="revio-choice-titles">
+                  <div class="revio-choice-title">Paste text</div>
+                  <div class="revio-choice-desc">Analyse a single review</div>
+                </div>
+                <div class="revio-choice-chevron">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </div>
+              <ul class="revio-choice-checklist">
+                <li>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Quick and easy</span>
+                </li>
+                <li>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Get instant results</span>
+                </li>
+                <li>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>See detailed explanation</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Choice 3: Try a sample -->
+            <div class="revio-choice-card" data-choice="sample" role="button" tabindex="0">
+              <div class="revio-choice-header-row">
+                <div class="revio-choice-icon soft-indigo">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                </div>
+                <div class="revio-choice-titles">
+                  <div class="revio-choice-title">Try a sample</div>
+                  <div class="revio-choice-desc">Explore example reviews</div>
+                </div>
+                <div class="revio-choice-chevron">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </div>
+              <ul class="revio-choice-checklist">
+                <li>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Pre-loaded sample dataset</span>
+                </li>
+                <li>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>See how Revio works</span>
+                </li>
+                <li>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Explore different sentiment types</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Choice Block: CSV -->
+          <div id="importBlockCsv" class="revio-import-dropzone-block">
+            <div class="revio-dropzone" id="csvDropzone">
+              <div class="revio-dropzone-center">
+                <div class="revio-dropzone-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                  </svg>
+                </div>
+                <h3 class="revio-dropzone-title">Drop your CSV file here</h3>
+                <p class="revio-dropzone-sub">or click to browse</p>
+                <div class="revio-dropzone-specs">
+                  Supports CSV, up to 10MB. Columns: review text (required) and optional metadata.
+                </div>
+              </div>
+
+              <!-- Browse files button positioned on the right inside dropzone -->
+              <div class="revio-dropzone-action-btn">
+                <button type="button" class="revio-btn-browse-file" onclick="document.getElementById('csvFileInput').click(); event.stopPropagation();" title="Browse files from computer">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                  <span>Browse files</span>
+                </button>
+              </div>
+
+              <input type="file" id="csvFileInput" accept=".csv" style="display: none;">
+            </div>
+
+            <div id="fileSelectedCard" class="revio-file-selected-card" style="display: none;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--revio-violet)" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+                <div>
+                  <strong id="selectedFileName">restaurant_reviews.csv</strong>
+                  <div style="font-size: 12px; color: var(--revio-text-secondary);" id="selectedFileInfo">1.2 MB · 2,500 reviews</div>
+                </div>
+              </div>
+              <button class="revio-btn revio-btn-ghost" onclick="removeSelectedFile()" style="font-size: 16px; color: var(--revio-text-secondary);" title="Remove file">&times;</button>
+            </div>
+
+            <!-- Bottom helper bar directly below dropzone -->
+            <div class="revio-import-helper-bar">
+              <div class="revio-helper-left">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span>Required: review or text column. Optional: date, rating, source, business category and other metadata.</span>
+              </div>
+              <a href="javascript:void(0)" onclick="downloadSampleCsvTemplate()" class="revio-helper-download-link">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <span>Download sample CSV template</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Choice Block: Text Paste -->
+          <div id="importBlockText" class="revio-card" style="display: none; padding: 24px; border-radius: 16px; border: 1.5px solid var(--revio-border);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <label class="revio-field-label" style="margin-bottom: 0; font-size: 14px; font-weight: 600;">Customer Review Text</label>
+              <span style="font-size: 12px; color: var(--revio-text-secondary);">English customer review</span>
+            </div>
+            <textarea id="pasteReviewInput" class="revio-textarea" rows="5" placeholder="Paste customer review here... e.g. 'The food arrived steaming hot and crispy, but the delivery driver took fifty minutes and forgot our dipping sauce.'"></textarea>
+            <div style="font-size: 12.5px; color: var(--revio-text-secondary); display: flex; align-items: center; gap: 8px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              <span>Analysed via Revio Yelp Polarity Word+Char TF-IDF Logistic Regression pipeline with instant feature attribution.</span>
+            </div>
+          </div>
+
+          <!-- Choice Block: Try a Sample -->
+          <div id="importBlockSample" class="revio-card" style="display: none; padding: 24px; border-radius: 16px; border: 1.5px solid var(--revio-border);">
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;">
+              <div>
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 6px;">Pre-loaded Curated Hospitality &amp; Dining Dataset</h3>
+                <p style="font-size: 13px; color: var(--revio-text-secondary); margin-bottom: 16px; line-height: 1.5;">
+                  Load 15 verified hospitality, restaurant, and customer experience reviews containing positive praise, nuanced mixed experiences, and operational friction cases requiring escalation.
+                </p>
+                <button class="revio-btn revio-btn-primary" onclick="runSampleAnalysis()" style="display: inline-flex; align-items: center; gap: 8px;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                  <span>Load 15 Sample Reviews &amp; Run Analysis</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Import Bottom Actions -->
+          <div style="display: flex; justify-content: flex-end; margin-top: 24px;">
+            <button id="importContinueBtn" class="revio-btn revio-btn-primary" disabled style="min-width: 140px;">
+              Continue &rarr;
+            </button>
+          </div>
+        </section>
+
+
+        <!-- ==============================================================
+             03 — CSV PREVIEW & VALIDATION (Screen 03)
+             ============================================================== -->
+        <section id="sec-csv-preview" style="display: none;">
+          <div class="revio-page-header">
+            <div>
+              <h1 class="revio-page-title">Validate and map your CSV data</h1>
+              <p class="revio-page-subtitle">Verify column mappings and inspect sample rows before triggering model inference.</p>
+            </div>
+            <button class="revio-btn revio-btn-secondary" onclick="navigateTo('import')">&larr; Change file</button>
+          </div>
+
+          <div class="revio-validation-summary">
+            <div>
+              <strong id="csvSummaryName">restaurant_reviews.csv</strong>
+              <div style="font-size: 13px; color: var(--revio-text-secondary);" id="csvSummaryMeta">1.2 MB · 2,500 reviews detected</div>
+            </div>
+            <span class="revio-badge revio-badge-pos" id="csvValidationBadge">✓ Ready for analysis</span>
+          </div>
+
+          <div class="revio-mapping-grid">
+            <!-- Left Column: Mapping -->
+            <div class="revio-card">
+              <h3 style="font-size: 15px; font-weight: 600; margin-bottom: 16px;">Column Mapping</h3>
+              <div class="revio-field-group">
+                <label class="revio-field-label">Review Text Column (Required)</label>
+                <select id="csvColumnMapSelect" class="revio-select"></select>
+              </div>
+              <div class="revio-field-group">
+                <label class="revio-field-label">Rating / Score (Optional)</label>
+                <select class="revio-select"><option>Auto-detect (if present)</option></select>
+              </div>
+              <div class="revio-field-group">
+                <label class="revio-field-label">Date (Optional)</label>
+                <select class="revio-select"><option>Auto-detect (if present)</option></select>
+              </div>
+              <p style="font-size: 12px; color: var(--revio-text-secondary); margin-top: 12px;">
+                Rows without text or shorter than 4 characters will be automatically skipped.
+              </p>
+            </div>
+
+            <!-- Right Column: Table Preview -->
+            <div class="revio-preview-table-wrap">
+              <table class="revio-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Review Excerpt</th>
+                    <th>Source</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody id="csvPreviewTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 12px;">
+            <button class="revio-btn revio-btn-secondary" onclick="navigateTo('import')">Back</button>
+            <button id="csvStartAnalysisBtn" class="revio-btn revio-btn-primary">Start analysis &rarr;</button>
+          </div>
+        </section>
+
+
+        <!-- ==============================================================
+             04 — ANALYSIS PROCESSING (Screen 04, matching 04_analysis_processing.png)
+             ============================================================== -->
+        <section id="sec-processing" style="display: none;">
+          <div class="revio-card revio-processing-dark-card" style="padding: 48px; background: #131316; color: #ffffff; border-color: rgba(255,255,255,0.12); box-shadow: 0 20px 60px rgba(0,0,0,0.4);">
+            <div class="revio-processing-grid">
+              <!-- Left: Steps Checklist -->
+              <div>
+                <h1 class="revio-page-title" style="margin-bottom: 8px; color: #ffffff;">Analysing your reviews</h1>
+                <p class="revio-page-subtitle" style="margin-bottom: 32px; color: var(--revio-text-muted-on-dark);" id="processingStatusText">
+                  Our AI is analysing the content, detecting sentiment, extracting key themes, and identifying important insights.
+                </p>
+
+                <div class="revio-stage-list">
+                  <div class="revio-stage-item completed" id="procStage1">
+                    <div class="revio-stage-circle">✓</div>
+                    <span style="color: #ffffff;">Uploading file</span>
+                  </div>
+                  <div class="revio-stage-item completed" id="procStage2">
+                    <div class="revio-stage-circle">✓</div>
+                    <span style="color: #ffffff;">Validating data</span>
+                  </div>
+                  <div class="revio-stage-item active" id="procStage3">
+                    <div class="revio-stage-circle">●</div>
+                    <span style="color: var(--revio-violet); font-weight: 600;">Analysing sentiment (Processing review 1,642 of 2,500)</span>
+                  </div>
+                  <div class="revio-stage-item" id="procStage4">
+                    <div class="revio-stage-circle">4</div>
+                    <span style="color: var(--revio-text-muted-on-dark);">Extracting key themes</span>
+                  </div>
+                  <div class="revio-stage-item" id="procStage5">
+                    <div class="revio-stage-circle">5</div>
+                    <span style="color: var(--revio-text-muted-on-dark);">Generating insights</span>
+                  </div>
+                  <div class="revio-stage-item" id="procStage6">
+                    <div class="revio-stage-circle">6</div>
+                    <span style="color: var(--revio-text-muted-on-dark);">Finalising results</span>
+                  </div>
+                </div>
+
+                <div style="margin-top: 36px; font-size: 13px; color: var(--revio-text-muted-on-dark);">
+                  This may take a few moments. You can leave this page.
+                </div>
+              </div>
+
+              <!-- Right: Real Interactive 3D Energy Orb & Counter -->
+              <div class="revio-processing-orb-wrap">
+                <div class="revio-orb-canvas-container" id="processingOrbContainer">
+                  <canvas id="revioProcessingCanvas" class="revio-processing-canvas"></canvas>
+                  <div class="revio-orb-center-overlay">
+                    <div class="revio-live-counter" id="processingCounter">66%</div>
+                    <div class="revio-orb-status-text">Analysing reviews...</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==============================================================
+             05 — RESULTS OVERVIEW (Screen 05)
+             ============================================================== -->
+        <section id="sec-results" style="display: none;">
+          <div class="revio-page-header">
+            <div>
+              <h1 class="revio-page-title">Analysis complete</h1>
+              <p class="revio-page-subtitle">We've analysed your customer reviews and uncovered key insights.</p>
+            </div>
+            <div style="display: flex; gap: 12px;">
+              <button id="resultsDownloadBtn" class="revio-btn revio-btn-secondary">Download report</button>
+              <button class="revio-btn revio-btn-primary" onclick="navigateTo('import')">+ New analysis</button>
+            </div>
+          </div>
+
+          <!-- Top KPI Cards (05_results_overview.png) -->
+          <div class="revio-kpi-row">
+            <div class="revio-kpi-card">
+              <div class="revio-kpi-val" id="kpiTotalCount">2,500</div>
+              <div class="revio-kpi-label">Reviews analysed</div>
+            </div>
+            <div class="revio-kpi-card">
+              <div class="revio-kpi-val" style="color: var(--revio-positive);" id="kpiPosPct">68.2%</div>
+              <div class="revio-kpi-label"><span class="revio-dot revio-dot-pos"></span> Positive</div>
+            </div>
+            <div class="revio-kpi-card">
+              <div class="revio-kpi-val" style="color: var(--revio-mixed);" id="kpiMixedPct">18.6%</div>
+              <div class="revio-kpi-label"><span class="revio-dot revio-dot-mixed"></span> Mixed</div>
+            </div>
+            <div class="revio-kpi-card">
+              <div class="revio-kpi-val" style="color: var(--revio-negative);" id="kpiNegPct">13.2%</div>
+              <div class="revio-kpi-label"><span class="revio-dot revio-dot-neg"></span> Negative</div>
+            </div>
+          </div>
+
+          <!-- Donut Chart & Themes Grid -->
+          <div class="revio-results-grid">
+            <!-- Left: Sentiment Distribution Donut -->
+            <div class="revio-card">
+              <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px;">Sentiment distribution</h3>
+              <div class="revio-donut-container">
+                <svg id="sentimentDonutSvg" width="180" height="180" viewBox="0 0 100 100"></svg>
+                <div style="position: absolute; text-align: center;">
+                  <strong style="font-size: 26px; display: block;" id="donutCenterCount">2.5K</strong>
+                  <span style="font-size: 12px; color: var(--revio-text-secondary);">Reviews</span>
+                </div>
+              </div>
+              <div style="display: flex; justify-content: center; gap: 24px; font-size: 13px; margin-top: 12px;">
+                <span style="display: flex; align-items: center; gap: 6px;"><span class="revio-dot revio-dot-pos"></span> Positive</span>
+                <span style="display: flex; align-items: center; gap: 6px;"><span class="revio-dot revio-dot-mixed"></span> Mixed</span>
+                <span style="display: flex; align-items: center; gap: 6px;"><span class="revio-dot revio-dot-neg"></span> Negative</span>
+              </div>
+            </div>
+
+            <!-- Right: Top Recurring Themes -->
+            <div class="revio-card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="font-size: 16px; font-weight: 600;">Top themes</h3>
+                <a href="#inbox" onclick="navigateTo('inbox')" style="font-size: 12px; color: var(--revio-violet);">View all</a>
+              </div>
+              <div class="revio-theme-bar-list" id="topThemesList"></div>
+            </div>
+          </div>
+
+          <!-- Direct Inbox CTA -->
+          <div class="revio-card" style="display: flex; justify-content: space-between; align-items: center; background: var(--revio-violet-soft); border-color: rgba(137,112,214,0.3);">
+            <div>
+              <strong style="color: var(--revio-text); font-size: 15px;">Want to review individual customer reviews?</strong>
+              <div style="font-size: 13px; color: var(--revio-text-secondary); margin-top: 2px;">
+                Browse, search, and manage all reviews in the Review Inbox.
+              </div>
+            </div>
+            <button class="revio-btn revio-btn-primary" onclick="navigateTo('inbox')">Open review inbox &rarr;</button>
+          </div>
+        </section>
+
+
+        <!-- ==============================================================
+             06 — REVIEW INBOX (Screen 06 — Exact Match to media_1793406251678_d2d474de.jpg)
+             ============================================================== -->
+        <section id="sec-inbox" style="display: none;">
+          <div class="revio-page-header">
+            <div>
+              <h1 class="revio-page-title" style="font-size: 28px; font-weight: 700; color: var(--revio-text); margin-bottom: 4px;">Review inbox</h1>
+              <p class="revio-page-subtitle" style="font-size: 14px; color: var(--revio-text-secondary); margin: 0;">Find, inspect and prioritise customer feedback.</p>
+            </div>
+            <button class="revio-btn revio-btn-primary" onclick="navigateTo('import')" style="border-radius: 12px; padding: 10px 20px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              <span>Import reviews</span>
+            </button>
+          </div>
+
+          <!-- 4 KPI Summary Cards (media_1793406251678_d2d474de.jpg) -->
+          <div class="revio-inbox-kpi-grid">
+            <div class="revio-inbox-kpi-card">
+              <div class="revio-inbox-kpi-icon purple">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                </svg>
+              </div>
+              <div class="revio-inbox-kpi-content">
+                <div class="revio-inbox-kpi-num" id="inboxKpiTotal">30</div>
+                <div class="revio-inbox-kpi-label">Total reviews</div>
+              </div>
+            </div>
+
+            <div class="revio-inbox-kpi-card">
+              <div class="revio-inbox-kpi-icon rose">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M16 16s-1.5-2-4-2-4 2-4 2"></path>
+                  <circle cx="9" cy="9" r="1" fill="currentColor"></circle>
+                  <circle cx="15" cy="9" r="1" fill="currentColor"></circle>
+                </svg>
+              </div>
+              <div class="revio-inbox-kpi-content">
+                <div class="revio-inbox-kpi-num" id="inboxKpiNeg">14</div>
+                <div class="revio-inbox-kpi-label">Negative</div>
+              </div>
+            </div>
+
+            <div class="revio-inbox-kpi-card">
+              <div class="revio-inbox-kpi-icon mint">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                  <circle cx="9" cy="9" r="1" fill="currentColor"></circle>
+                  <circle cx="15" cy="9" r="1" fill="currentColor"></circle>
+                </svg>
+              </div>
+              <div class="revio-inbox-kpi-content">
+                <div class="revio-inbox-kpi-num" id="inboxKpiPos">16</div>
+                <div class="revio-inbox-kpi-label">Positive</div>
+              </div>
+            </div>
+
+            <div class="revio-inbox-kpi-card">
+              <div class="revio-inbox-kpi-icon amber">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                  <line x1="12" y1="9" x2="12" y2="13"></line>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+              </div>
+              <div class="revio-inbox-kpi-content">
+                <div class="revio-inbox-kpi-num" id="inboxKpiAttention">16</div>
+                <div class="revio-inbox-kpi-label">Needs review</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filter Tabs & Search Controls (media_1793406251678_d2d474de.jpg) -->
+          <div class="revio-inbox-header-row">
+            <div class="revio-filter-tabs">
+              <button class="revio-filter-tab active" data-tab="all" onclick="setInboxFilter('all')">
+                All (<span id="inboxCountAll">30</span>)
+              </button>
+              <button class="revio-filter-tab" data-tab="negative" onclick="setInboxFilter('negative')">
+                Negative (<span id="inboxCountNeg">14</span>)
+              </button>
+              <button class="revio-filter-tab" data-tab="mixed" onclick="setInboxFilter('mixed')">
+                Mixed (<span id="inboxCountMixed">0</span>)
+              </button>
+              <button class="revio-filter-tab" data-tab="positive" onclick="setInboxFilter('positive')">
+                Positive (<span id="inboxCountPos">16</span>)
+              </button>
+              <button class="revio-filter-tab" data-tab="needs_review" onclick="setInboxFilter('needs_review')">
+                Needs review (<span id="inboxCountReview">16</span>)
+              </button>
+            </div>
+
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <div class="revio-search-box" style="width: 220px; padding: 6px 14px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="inboxSearchInput" placeholder="Search reviews..." oninput="state.inboxSearchTerm = this.value; renderReviewInbox();">
+              </div>
+
+              <button class="revio-btn revio-btn-secondary" id="inboxToggleFilterBtn" style="height: 36px; padding: 0 14px; font-size: 13px; border-radius: 20px;" onclick="toggleInboxFilterPanel()" title="Toggle advanced filters">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px;">
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                </svg>
+                <span>Filters</span>
+                <span id="inboxActiveFilterCount" class="revio-filter-pill-count" style="display: inline-block;">2</span>
+              </button>
+
+              <select class="revio-select" style="height: 36px; padding: 0 12px; width: 140px; font-size: 13px; border-radius: 20px;" onchange="state.inboxSort = this.value; renderReviewInbox();">
+                <option value="newest">Newest first</option>
+                <option value="oldest">Oldest first</option>
+                <option value="priority">Priority / Risk</option>
+                <option value="confidence_desc">Highest confidence</option>
+                <option value="confidence_asc">Lowest confidence</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Interactive Secondary Filter Panel -->
+          <div id="inboxFilterPanel" class="revio-filter-panel" style="display: none;">
+            <div class="revio-filter-group">
+              <label for="inboxCategorySelect">Category:</label>
+              <select id="inboxCategorySelect" class="revio-select" style="height: 32px; font-size: 12px; padding: 0 8px;" onchange="setInboxCategoryFilter(this.value)">
+                <option value="all">All categories</option>
+                <option value="Service Delay">Service Delay &amp; Friction</option>
+                <option value="Facility Defect">Facility &amp; Maintenance</option>
+                <option value="Billing &amp; Pricing">Billing &amp; Pricing</option>
+                <option value="Staff Hospitality">Staff Hospitality &amp; Service</option>
+              </select>
+            </div>
+            <div class="revio-filter-group">
+              <label for="inboxStatusSelect">Attention:</label>
+              <select id="inboxStatusSelect" class="revio-select" style="height: 32px; font-size: 12px; padding: 0 8px;" onchange="setInboxStatusFilter(this.value)">
+                <option value="all">All statuses</option>
+                <option value="needs_review">Needs review only</option>
+                <option value="reviewed">Reviewed only</option>
+                <option value="auto_ack">Low priority (no review)</option>
+              </select>
+            </div>
+            <div class="revio-filter-group">
+              <label for="inboxDateSelect">Date Range:</label>
+              <select id="inboxDateSelect" class="revio-select" style="height: 32px; font-size: 12px; padding: 0 8px;" onchange="setInboxDateFilter(this.value)">
+                <option value="all">All time</option>
+                <option value="7d">Last 7 days</option>
+                <option value="30d">Last 30 days</option>
+                <option value="90d">Last 90 days</option>
+              </select>
+            </div>
+            <button class="revio-btn revio-btn-ghost" style="height: 32px; font-size: 12px; margin-left: auto;" onclick="resetInboxFilters()">
+              Reset all filters
+            </button>
+          </div>
+
+          <!-- Batch Action Toolbar (Always accessible strip, matching media_1793406251678_d2d474de.jpg) -->
+          <div class="revio-inbox-batch-toolbar">
+            <div class="revio-batch-left">
+              <label class="revio-batch-checkbox-wrap">
+                <input type="checkbox" id="selectAllCheckbox" onchange="toggleSelectAllRows(this.checked)">
+                <span id="bulkActionText">Select reviews to apply actions</span>
+              </label>
+            </div>
+            <div class="revio-batch-actions">
+              <button class="revio-btn-batch" id="btnMarkReviewed" onclick="bulkMarkReviewed(true)" title="Mark selected reviews as reviewed">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Mark reviewed</span>
+              </button>
+              <button class="revio-btn-batch" id="btnAssignReviews" onclick="showToast('Assigned selected reviews to team', 'success')" title="Assign reviews to team member">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <span>Assign</span>
+              </button>
+              <button class="revio-btn-batch icon-only" onclick="showToast('Additional batch options: Export CSV, Delete, Archive', 'info')" title="More actions">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Table Container -->
+          <div class="revio-preview-table-wrap" style="margin-bottom: 16px; border-radius: 16px; border: 1px solid var(--revio-border); overflow: hidden; background: var(--revio-surface);">
+            <table class="revio-table">
+              <thead>
+                <tr>
+                  <th style="width: 38px;">
+                    <input type="checkbox" id="tableHeaderCheck" onchange="toggleSelectAllRows(this.checked)">
+                  </th>
+                  <th style="width: 125px;">SENTIMENT</th>
+                  <th>REVIEW</th>
+                  <th style="width: 165px;">SOURCE / ISSUE</th>
+                  <th style="width: 110px;">CONFIDENCE</th>
+                  <th style="width: 100px;">DATE</th>
+                  <th style="width: 110px;">STATUS</th>
+                  <th style="width: 38px;"></th>
+                </tr>
+              </thead>
+              <tbody id="inboxTableBody"></tbody>
+            </table>
+          </div>
+
+          <!-- Pagination Bar -->
+          <div class="revio-inbox-pagination-wrap">
+            <span id="inboxPageInfo">Showing 1–5 of 30 reviews</span>
+            <div class="revio-inbox-pagination-right">
+              <div class="revio-inbox-pages" id="inboxPaginationPages">
+                <button class="revio-page-btn" onclick="changeInboxPage(-1)" id="inboxPrevPageBtn">&larr;</button>
+                <button class="revio-page-btn active" onclick="goToInboxPage(1)">1</button>
+                <button class="revio-page-btn" onclick="goToInboxPage(2)">2</button>
+                <button class="revio-page-btn" onclick="goToInboxPage(3)">3</button>
+                <span style="font-size: 11px; color: var(--revio-text-secondary); padding: 0 2px;">...</span>
+                <button class="revio-page-btn" onclick="goToInboxPage(6)">6</button>
+                <button class="revio-page-btn" onclick="changeInboxPage(1)" id="inboxNextPageBtn">&rarr;</button>
+              </div>
+              <select class="revio-select-pagesize" id="inboxPageSizeSelect" onchange="state.inboxPageSize = parseInt(this.value); state.inboxPage = 1; renderReviewInbox();">
+                <option value="5" selected>5 per page</option>
+                <option value="10">10 per page</option>
+                <option value="25">25 per page</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Bottom Priority Attention Alert Strip (media_1793406251678_d2d474de.jpg) -->
+          <div class="revio-inbox-attention-alert">
+            <div class="revio-attention-left">
+              <div class="revio-attention-warn-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                  <line x1="12" y1="9" x2="12" y2="13"></line>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+              </div>
+              <div class="revio-attention-text">
+                <strong id="inboxAttentionTitle">16 reviews need attention</strong>
+                <span>Review low-confidence or negative feedback first.</span>
+              </div>
+            </div>
+            <button class="revio-btn-priority-queue" onclick="setInboxFilter('needs_review')">
+              <span>Open priority queue &rarr;</span>
+            </button>
+          </div>
+        </section>
+
+
+        <!-- ==============================================================
+             07 — REVIEW DETAIL (Screen 07, matching 07_review_detail.png)
+             ============================================================== -->
+        <section id="sec-detail" style="display: none;">
+          <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <div class="revio-breadcrumb" style="font-size: 13px;">
+              <a href="#inbox" onclick="navigateTo('inbox')" style="color: var(--revio-violet);">Review inbox</a>
+              <span class="revio-breadcrumb-sep">&gt;</span>
+              <span class="revio-breadcrumb-current">Review detail</span>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="revio-btn revio-btn-secondary" style="height: 32px; padding: 0 12px; font-size: 12px;" onclick="navigateDetailReview(-1)">&larr; Previous</button>
+              <button class="revio-btn revio-btn-secondary" style="height: 32px; padding: 0 12px; font-size: 12px;" onclick="navigateDetailReview(1)">Next &rarr;</button>
+            </div>
+          </div>
+
+          <div class="revio-detail-grid">
+            <!-- Left Main Column -->
+            <div>
+              <div class="revio-quote-block" id="detailReviewQuote">
+                "The room was clean and the staff were kind, but check-in took nearly forty minutes and no one explained the delay."
+              </div>
+
+              <div style="display: flex; gap: 24px; font-size: 13px; color: var(--revio-text-secondary); margin-bottom: 24px;">
+                <span>Source: <strong id="detailReviewSource">Google Reviews</strong></span>
+                <span>Date: <strong id="detailReviewDate">12 Oct 2026, 4:32 PM</strong></span>
+                <span id="detailReviewId">Review ID: GB-104892</span>
+              </div>
+
+              <!-- Explainability Card Matching 07_review_detail.png -->
+              <div class="revio-card">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 6px;" id="detailWhyTitle">
+                  Why this was classified as mixed
+                </h3>
+                <p style="font-size: 13px; color: var(--revio-text-secondary); margin-bottom: 20px;" id="detailWhyDesc">
+                  The review contains both positive and negative aspects. The customer appreciates the clean and friendly staff, but mentions a significant check-in delay and lack of communication, which indicates a service issue.
+                </p>
+
+                <!-- Two Evidence Cards Side by Side -->
+                <div class="revio-evidence-cards-row">
+                  <!-- Positive Evidence Box -->
+                  <div class="revio-evidence-card-pos">
+                    <div class="revio-evidence-card-title" style="color: var(--revio-positive);">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      Positive evidence
+                    </div>
+                    <div class="revio-evidence-card-sub">Aspects that indicate a positive experience.</div>
+                    <div id="detailPosEvidence" class="revio-evidence-chips">
+                      <div id="detailPosEvidenceChips">
+                        <div class="revio-evidence-item-chip">
+                          <strong>"The room was clean"</strong>
+                          <span>Room cleanliness</span>
+                        </div>
+                        <div class="revio-evidence-item-chip">
+                          <strong>"the staff were kind"</strong>
+                          <span>Staff behaviour</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Negative Evidence Box -->
+                  <div class="revio-evidence-card-neg">
+                    <div class="revio-evidence-card-title" style="color: var(--revio-negative);">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                      Negative evidence
+                    </div>
+                    <div class="revio-evidence-card-sub">Aspects that indicate a negative experience.</div>
+                    <div id="detailNegEvidence" class="revio-evidence-chips">
+                      <div id="detailNegEvidenceChips">
+                        <div class="revio-evidence-item-chip">
+                          <strong>"check-in took nearly forty minutes"</strong>
+                          <span>Long wait time</span>
+                        </div>
+                        <div class="revio-evidence-item-chip">
+                          <strong>"no one explained the delay"</strong>
+                          <span>Poor communication</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Overall Interpretation Box -->
+                <div class="revio-interpretation-box">
+                  <strong>Overall interpretation</strong>
+                  <span id="detailInterpretationText">
+                    The positive aspects are outweighed by avoidable service delay and lack of communication, resulting in a mixed sentiment.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Sidebar: Sentiment, Uncertainty & Business Risk -->
+            <div>
+              <div class="revio-card" style="margin-bottom: 20px;">
+                <!-- 1. Sentiment Polarity Result -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                  <div>
+                    <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--revio-text-secondary); font-weight: 700; display: block; margin-bottom: 4px;">Predicted Sentiment</span>
+                    <span id="detailSentimentBadge" class="revio-badge revio-badge-mixed">Mixed</span>
+                  </div>
+                  <div style="text-align: right;">
+                    <span style="font-size: 22px; font-weight: 700; font-family: var(--font-mono);" id="detailConfidenceVal">0.86</span>
+                    <div style="font-size: 11px; color: var(--revio-text-secondary);">Model score</div>
+                  </div>
+                </div>
+
+                <!-- Positive-class Probability Breakdown in Detail View -->
+                <div class="revio-probability-breakdown" style="margin-bottom: 16px;">
+                  <div class="revio-prob-header-row">
+                    <span class="revio-prob-title">Positive-class Probability</span>
+                    <span class="revio-prob-threshold-note">Threshold: 48.0%</span>
+                  </div>
+                  <div class="revio-prob-split-bar">
+                    <div class="revio-prob-fill-neg" id="detailProbFillNeg" style="width: 50%;"></div>
+                    <div class="revio-prob-threshold-marker" style="left: 48%;"></div>
+                    <div class="revio-prob-fill-pos" id="detailProbFillPos" style="width: 50%;"></div>
+                  </div>
+                  <div class="revio-prob-labels-row">
+                    <span id="detailProbLabelNeg">P(Neg): <strong>--%</strong></span>
+                    <span id="detailProbLabelMargin" class="revio-prob-margin-indicator">Evaluating...</span>
+                    <span id="detailProbLabelPos">P(Pos): <strong>--%</strong></span>
+                  </div>
+                </div>
+
+                <!-- 2. Statistical Uncertainty Breakdown -->
+                <div class="revio-detail-uncertainty-card">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <strong style="font-size: 12px; color: var(--revio-text);">Statistical Uncertainty</strong>
+                    <span id="detailUncertaintyBadge" class="revio-badge revio-badge-neutral" style="font-size: 10px;">Moderate</span>
+                  </div>
+                  <p style="font-size: 11.5px; color: var(--revio-text-secondary); margin: 0; line-height: 1.4;" id="detailUncertaintyNote">
+                    Prediction falls within the 0.40–0.60 ambiguity corridor. Co-occurring positive and negative n-grams require human arbitration.
+                  </p>
+                </div>
+
+                <!-- 3. Operational Business Risk -->
+                <div style="margin-bottom: 16px;">
+                  <strong style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--revio-text-secondary); display: block; margin-bottom: 6px;">Business Risk &amp; Triage</strong>
+                  <div style="background: var(--revio-mixed-soft); border: 1px solid rgba(181,122,55,0.25); border-radius: var(--radius-control); padding: 12px;" id="detailTriageBox">
+                    <div style="font-size: 13px; font-weight: 600; color: var(--revio-mixed); margin-bottom: 4px;" id="detailTriageStatus">
+                      ESCALATE (Service Delay &amp; Friction)
+                    </div>
+                    <div style="font-size: 12px; color: var(--revio-text);" id="detailAttentionDesc">
+                      Service delay mentioned alongside positive staff feedback.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Actions -->
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <button id="detailQueueBtn" class="revio-btn revio-btn-primary" style="width: 100%;">
+                    + Add to review queue
+                  </button>
+                  <button id="detailMarkReviewedBtn" class="revio-btn revio-btn-secondary" style="width: 100%;">
+                    ✓ Mark as reviewed
+                  </button>
+                  <button class="revio-btn revio-btn-ghost" style="width: 100%; font-size: 13px;" onclick="openTechExplanationModal()">
+                    View full model attribution &rarr;
+                  </button>
+                  <button class="revio-btn revio-btn-ghost" style="width: 100%; font-size: 13px;" onclick="copyReviewText()">
+                    Copy review text
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==============================================================
+             08 — INSIGHTS (Screen 08, matching 08_insights.png)
+             ============================================================== -->
+        <section id="sec-insights" style="display: none;">
+          <div class="revio-page-header">
+            <div>
+              <h1 class="revio-page-title">Insights</h1>
+              <p class="revio-page-subtitle">Discover recurring problems and what your customers love.</p>
+            </div>
+            <select class="revio-select" id="insightsPeriodSelect" onchange="changeInsightsPeriod(this.value)" style="height: 38px; width: 140px; font-size: 13px;">
+              <option value="30">Last 30 days</option>
+              <option value="7">Last 7 days</option>
+              <option value="all">All time</option>
+            </select>
+          </div>
+
+          <!-- Insights Tabs -->
+          <div class="revio-filter-tabs" style="margin-bottom: 24px;">
+            <button class="revio-filter-tab active" id="tabBtnInsightsOverview" onclick="switchInsightsTab('overview', this)">Overview</button>
+            <button class="revio-filter-tab" id="tabBtnInsightsTopics" onclick="switchInsightsTab('topics', this)">Topics</button>
+            <button class="revio-filter-tab" id="tabBtnInsightsTrends" onclick="switchInsightsTab('trends', this)">Trends</button>
+            <button class="revio-filter-tab" id="tabBtnInsightsFeedback" onclick="switchInsightsTab('feedback', this)">Customer feedback</button>
+          </div>
+
+          <!-- Tab 1: Overview -->
+          <div id="insightsTabOverview">
+            <!-- Executive KPI Row -->
+            <div class="revio-kpi-row" style="margin-bottom: 24px;">
+              <div class="revio-kpi-card">
+                <div class="revio-kpi-val">3,842</div>
+                <div class="revio-kpi-label">
+                  <span>Total Reviews Analysed</span>
+                  <span class="revio-kpi-delta pos">+12.4%</span>
+                </div>
+              </div>
+              <div class="revio-kpi-card">
+                <div class="revio-kpi-val" style="color: #10b981;">72.8%</div>
+                <div class="revio-kpi-label">
+                  <span>Customer Sentiment Index</span>
+                  <span class="revio-kpi-delta pos">+4.1%</span>
+                </div>
+              </div>
+              <div class="revio-kpi-card">
+                <div class="revio-kpi-val" style="color: #f59e0b;">14.2%</div>
+                <div class="revio-kpi-label">
+                  <span>Operational Friction Rate</span>
+                  <span class="revio-kpi-delta pos">-2.8%</span>
+                </div>
+              </div>
+              <div class="revio-kpi-card">
+                <div class="revio-kpi-val" style="color: var(--revio-violet);">8.4 ms</div>
+                <div class="revio-kpi-label">
+                  <span>P95 Fast-Path Latency</span>
+                  <span class="revio-kpi-delta neutral">Pre-Warmed</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top Grid: Trend + Complaints -->
+            <div class="revio-insights-grid">
+              <!-- Left: Sentiment Trend Line Chart (SVG) -->
+              <div class="revio-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <h3 style="font-size: 16px; font-weight: 600;">Sentiment trend</h3>
+                  <div style="display: flex; gap: 16px; font-size: 12px;">
+                    <span style="display: flex; align-items: center; gap: 4px;"><span class="revio-dot revio-dot-pos"></span> Positive</span>
+                    <span style="display: flex; align-items: center; gap: 4px;"><span class="revio-dot revio-dot-mixed"></span> Mixed</span>
+                    <span style="display: flex; align-items: center; gap: 4px;"><span class="revio-dot revio-dot-neg"></span> Negative</span>
+                  </div>
+                </div>
+
+                <!-- SVG Trend Graph with Smooth Gradients -->
+                <div class="revio-trend-svg-wrap">
+                  <svg width="100%" height="160" viewBox="0 0 500 160" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="trendGradPos" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#10B981" stop-opacity="0.22"/>
+                        <stop offset="100%" stop-color="#10B981" stop-opacity="0.0"/>
+                      </linearGradient>
+                      <linearGradient id="trendGradMixed" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.16"/>
+                        <stop offset="100%" stop-color="#F59E0B" stop-opacity="0.0"/>
+                      </linearGradient>
+                      <linearGradient id="trendGradNeg" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#EF4444" stop-opacity="0.18"/>
+                        <stop offset="100%" stop-color="#EF4444" stop-opacity="0.0"/>
+                      </linearGradient>
+                    </defs>
+
+                    <!-- Grid lines -->
+                    <line x1="0" y1="30" x2="500" y2="30" stroke="var(--revio-border)" stroke-dasharray="3 3" />
+                    <line x1="0" y1="80" x2="500" y2="80" stroke="var(--revio-border)" stroke-dasharray="3 3" />
+                    <line x1="0" y1="130" x2="500" y2="130" stroke="var(--revio-border)" stroke-dasharray="3 3" />
+
+                    <!-- Area fills -->
+                    <path d="M 0 50 Q 80 40 160 30 T 320 25 T 500 20 L 500 160 L 0 160 Z" fill="url(#trendGradPos)" />
+
+                    <!-- Positive Trend Line (Green) -->
+                    <path id="svgTrendPos" d="M 0 50 Q 80 40 160 30 T 320 25 T 500 20" fill="none" stroke="var(--revio-positive)" stroke-width="3" stroke-linecap="round" />
+
+                    <!-- Mixed Trend Line (Amber) -->
+                    <path id="svgTrendMixed" d="M 0 95 Q 90 90 180 85 T 340 90 T 500 80" fill="none" stroke="var(--revio-mixed)" stroke-width="2.5" stroke-linecap="round" />
+
+                    <!-- Negative Trend Line (Coral) -->
+                    <path id="svgTrendNeg" d="M 0 135 Q 100 140 200 130 T 360 120 T 500 115" fill="none" stroke="var(--revio-negative)" stroke-width="2.5" stroke-linecap="round" />
+                  </svg>
+
+                  <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--revio-text-secondary); padding: 0 4px;" id="insightsTrendDatesRow">
+                    <span>1 Oct</span>
+                    <span>7 Oct</span>
+                    <span>14 Oct</span>
+                    <span>21 Oct</span>
+                    <span>28 Oct</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Top Complaint Themes -->
+              <div class="revio-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                  <h3 style="font-size: 16px; font-weight: 600; margin: 0;">Top complaint themes</h3>
+                  <span style="font-size: 11px; color: var(--revio-text-secondary); font-family: var(--font-mono);">Click to filter inbox</span>
+                </div>
+                <div class="revio-theme-bar-list" id="insightsComplaintBars"></div>
+              </div>
+            </div>
+
+            <!-- Bottom Grid: What Customers Love + Key Insight -->
+            <div class="revio-insights-grid">
+              <div class="revio-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                  <h3 style="font-size: 16px; font-weight: 600; margin: 0;">What customers love</h3>
+                  <span style="font-size: 11px; color: var(--revio-text-secondary); font-family: var(--font-mono);">Click to filter inbox</span>
+                </div>
+                <div class="revio-theme-bar-list" id="insightsPraiseBars"></div>
+              </div>
+
+              <!-- Key Insight Card matching 08_insights.png -->
+              <div class="revio-card" style="display: flex; flex-direction: column; justify-content: center; gap: 12px; background: var(--revio-champagne-soft); border-color: rgba(199,167,122,0.4);">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="color: var(--revio-champagne);">
+                    <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" fill="currentColor"/>
+                  </svg>
+                  <strong style="font-size: 15px; color: var(--revio-text);">Key insight</strong>
+                </div>
+                <p style="font-size: 13px; color: var(--revio-text-secondary); line-height: 1.5; margin: 0;" id="insightsKeySummary">
+                  Slow service and billing issues are the most common problems, appearing in 40% of negative reviews.
+                </p>
+                <a href="#inbox" onclick="setInboxFilter('negative'); navigateTo('inbox')" style="font-size: 13px; font-weight: 600; color: var(--revio-text); display: inline-flex; align-items: center; gap: 4px;">
+                  Review negative complaints &rarr;
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 2: Topics Deep-Dive Table -->
+          <div id="insightsTabTopics" style="display: none;">
+            <div class="revio-card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <div>
+                  <h3 style="font-size: 16px; font-weight: 600; margin: 0 0 4px;">Operational Topic Taxonomy</h3>
+                  <p style="font-size: 12px; color: var(--revio-text-secondary); margin: 0;">Friction and praise distributions across all analyzed reviews.</p>
+                </div>
+              </div>
+              <div style="overflow-x: auto;">
+                <table class="revio-table" style="width: 100%;">
+                  <thead>
+                    <tr>
+                      <th>Topic Domain</th>
+                      <th>Classification</th>
+                      <th>Volume</th>
+                      <th>Occurrence Share</th>
+                      <th>Representative Evidence</th>
+                      <th style="text-align: right;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="insightsTopicsTableBody">
+                    <!-- Populated dynamically by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 3: Weekly Trends -->
+          <div id="insightsTabTrends" style="display: none;">
+            <div class="revio-card" style="margin-bottom: 20px;">
+              <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Weekly Sentiment Breakdown</h3>
+              <p style="font-size: 12px; color: var(--revio-text-secondary); margin-bottom: 20px;">Review volume and sentiment classification velocity over recent 4-week intervals.</p>
+              <div id="insightsWeeklyTrendGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                <!-- Populated dynamically by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 4: Customer Feedback Stream -->
+          <div id="insightsTabFeedback" style="display: none;">
+            <div class="revio-card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+                <div>
+                  <h3 style="font-size: 16px; font-weight: 600; margin: 0 0 4px;">Recent Customer Feedback Stream</h3>
+                  <p style="font-size: 12px; color: var(--revio-text-secondary); margin: 0;">Live review verbatim quotes with real-time model classifications.</p>
+                </div>
+                <button class="revio-btn revio-btn-secondary" onclick="navigateTo('inbox')" style="height: 32px; font-size: 12px; padding: 0 12px;">Open Full Inbox &rarr;</button>
+              </div>
+              <div id="insightsFeedbackList" style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- Populated dynamically by JS -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==============================================================
+             09 — MODEL LAB (Screen 09, matching 09_model_lab.png)
+             ============================================================== -->
+        <section id="sec-models" style="display: none;">
+          <div class="revio-page-header">
+            <div>
+              <h1 class="revio-page-title">Model Lab</h1>
+              <p class="revio-page-subtitle">Compare model performance and understand how Revio works.</p>
+            </div>
+          </div>
+
+          <!-- Model Lab Tabs -->
+          <div class="revio-filter-tabs" style="margin-bottom: 24px;">
+            <button class="revio-filter-tab active" id="tabBtnModelsPerf" onclick="switchModelLabTab('performance', this)">Performance</button>
+            <button class="revio-filter-tab" id="tabBtnModelsConfusion" onclick="switchModelLabTab('confusion', this)">Confusion matrix</button>
+            <button class="revio-filter-tab" id="tabBtnModelsDataset" onclick="switchModelLabTab('dataset', this)">Dataset</button>
+            <button class="revio-filter-tab" id="tabBtnModelsDetails" onclick="switchModelLabTab('details', this)">Model details</button>
+          </div>
+
+          <!-- Tab 1: Performance (Existing 3-Column Grid) -->
+          <div id="modelLabTabPerformance">
+            <div class="revio-model-grid">
+              <!-- 1. Logistic Regression -->
+              <div class="revio-model-card active-prod">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <strong style="font-size: 16px;">Logistic Regression</strong>
+                    <span class="revio-badge revio-badge-pos" id="mlStatusLr">Production Active</span>
+                  </div>
+                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--revio-text-secondary);">Held-Out Test Accuracy</div>
+                  <div style="font-size: 26px; font-weight: 700; color: var(--revio-text); margin-top: 2px; font-family: var(--font-mono);">
+                    <span class="revio-dot revio-dot-pos" style="margin-right: 4px;"></span> 92.4%
+                  </div>
+
+                  <!-- Mini Bar Chart Graphic (Precision, Recall, F1) -->
+                  <div class="revio-mini-chart">
+                    <div class="revio-mini-bar-col">
+                      <div class="revio-mini-bar" style="height: 56px; background: linear-gradient(180deg, #34d399, #10b981);"></div>
+                      <span class="revio-mini-bar-label">P (91.8%)</span>
+                    </div>
+                    <div class="revio-mini-bar-col">
+                      <div class="revio-mini-bar" style="height: 58px; background: linear-gradient(180deg, #34d399, #10b981);"></div>
+                      <span class="revio-mini-bar-label">R (93.7%)</span>
+                    </div>
+                    <div class="revio-mini-bar-col">
+                      <div class="revio-mini-bar" style="height: 57px; background: linear-gradient(180deg, #34d399, #10b981);"></div>
+                      <span class="revio-mini-bar-label">F1 (92.7%)</span>
+                    </div>
+                  </div>
+
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12.5px; margin-bottom: 14px;">
+                    <span style="color: var(--revio-text-secondary);">Precision</span><strong>0.918</strong>
+                    <span style="color: var(--revio-text-secondary);">Recall (Neg)</span><strong>0.937</strong>
+                    <span style="color: var(--revio-text-secondary);">F1-Score</span><strong>0.927</strong>
+                    <span style="color: var(--revio-text-secondary);">P95 Latency</span><strong style="color: #10b981;">8.4 ms</strong>
+                  </div>
+
+                  <div style="font-size: 11px; color: var(--revio-text-secondary); background: var(--revio-surface-muted); padding: 6px 10px; border-radius: 6px; border: 1px solid var(--revio-border);">
+                    Features: 75,000 word (1-2) + char (3-5) n-grams.
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. Bi-LSTM -->
+              <div class="revio-model-card">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <strong style="font-size: 16px;">Bi-LSTM (Bidirectional)</strong>
+                    <span class="revio-badge revio-badge-pos" id="mlStatusLstm">Loaded</span>
+                  </div>
+                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--revio-text-secondary);">Sequential Accuracy</div>
+                  <div style="font-size: 26px; font-weight: 700; color: var(--revio-text); margin-top: 2px; font-family: var(--font-mono);">
+                    <span class="revio-dot revio-dot-pos" style="margin-right: 4px;"></span> 89.1%
+                  </div>
+
+                  <!-- Mini Bar Chart Graphic (Precision, Recall, F1) -->
+                  <div class="revio-mini-chart">
+                    <div class="revio-mini-bar-col">
+                      <div class="revio-mini-bar" style="height: 52px; background: linear-gradient(180deg, #a78bfa, #7c3aed);"></div>
+                      <span class="revio-mini-bar-label">P (88.4%)</span>
+                    </div>
+                    <div class="revio-mini-bar-col">
+                      <div class="revio-mini-bar" style="height: 54px; background: linear-gradient(180deg, #a78bfa, #7c3aed);"></div>
+                      <span class="revio-mini-bar-label">R (89.9%)</span>
+                    </div>
+                    <div class="revio-mini-bar-col">
+                      <div class="revio-mini-bar" style="height: 53px; background: linear-gradient(180deg, #a78bfa, #7c3aed);"></div>
+                      <span class="revio-mini-bar-label">F1 (89.1%)</span>
+                    </div>
+                  </div>
+
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12.5px; margin-bottom: 14px;">
+                    <span style="color: var(--revio-text-secondary);">Precision</span><strong>0.884</strong>
+                    <span style="color: var(--revio-text-secondary);">Recall</span><strong>0.899</strong>
+                    <span style="color: var(--revio-text-secondary);">F1-Score</span><strong>0.891</strong>
+                    <span style="color: var(--revio-text-secondary);">P95 Latency</span><strong>42.1 ms</strong>
+                  </div>
+
+                  <div style="font-size: 11px; color: var(--revio-text-secondary); background: var(--revio-surface-muted); padding: 6px 10px; border-radius: 6px; border: 1px solid var(--revio-border);">
+                    Architecture: 2-layer Bi-LSTM + 100d GloVe embeddings.
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. BERT Fine-Tuned -->
+              <div class="revio-model-card">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <strong style="font-size: 16px;">DistilBERT Transformer</strong>
+                    <span class="revio-badge revio-badge-neutral" id="mlStatusBert">Offline (Standby)</span>
+                  </div>
+                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--revio-text-secondary);">Transformer Accuracy</div>
+                  <div style="font-size: 26px; font-weight: 700; color: var(--revio-text); margin-top: 2px; font-family: var(--font-mono);">
+                    <span class="revio-dot revio-dot-pos" style="margin-right: 4px;"></span> 91.2%
+                  </div>
+
+                  <!-- Mini Bar Chart Graphic (Precision, Recall, F1) -->
+                  <div class="revio-mini-chart">
+                    <div class="revio-mini-bar-col">
+                      <div class="revio-mini-bar" style="height: 55px; background: linear-gradient(180deg, #60a5fa, #2563eb);"></div>
+                      <span class="revio-mini-bar-label">P (92.1%)</span>
+                    </div>
+                    <div class="revio-mini-bar-col">
+                      <div class="revio-mini-bar" style="height: 54px; background: linear-gradient(180deg, #60a5fa, #2563eb);"></div>
+                      <span class="revio-mini-bar-label">R (90.4%)</span>
+                    </div>
+                    <div class="revio-mini-bar-col">
+                      <div class="revio-mini-bar" style="height: 55px; background: linear-gradient(180deg, #60a5fa, #2563eb);"></div>
+                      <span class="revio-mini-bar-label">F1 (91.2%)</span>
+                    </div>
+                  </div>
+
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12.5px; margin-bottom: 14px;">
+                    <span style="color: var(--revio-text-secondary);">Precision</span><strong>0.921</strong>
+                    <span style="color: var(--revio-text-secondary);">Recall</span><strong>0.904</strong>
+                    <span style="color: var(--revio-text-secondary);">F1-Score</span><strong>0.912</strong>
+                    <span style="color: var(--revio-text-secondary);">P95 Latency</span><strong>184.6 ms</strong>
+                  </div>
+
+                  <div style="font-size: 11px; color: var(--revio-text-secondary); background: var(--revio-surface-muted); padding: 6px 10px; border-radius: 6px; border: 1px solid var(--revio-border);">
+                    Architecture: 6-layer DistilBERT with 66M parameters.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer Verification Banner (09_model_lab.png) -->
+            <div class="revio-card" style="display: flex; justify-content: space-between; align-items: center; background: var(--revio-surface-muted);">
+              <div>
+                <span style="font-size: 13px; color: var(--revio-text-secondary);">Evaluation on Yelp review dataset (held-out test set):</span>
+              </div>
+              <div style="display: flex; gap: 24px; font-size: 14px;">
+                <span><strong>92.4%</strong> overall accuracy</span>
+                <span><strong>93.7%</strong> negative recall</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 2: Confusion Matrix -->
+          <div id="modelLabTabConfusion" style="display: none;">
+            <div class="revio-card">
+              <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Multi-Model Confusion Matrices (Held-out Test Set, N=38,000)</h3>
+              <p style="font-size: 12px; color: var(--revio-text-secondary); margin-bottom: 20px;">Evaluated on balanced Yelp Polarity validation split with operational decision threshold (0.48).</p>
+              
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <!-- LR Matrix -->
+                <div style="border: 1px solid var(--revio-border); border-radius: 10px; padding: 16px; background: var(--revio-surface);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <strong style="font-size: 14px;">Logistic Regression (Word+Char)</strong>
+                    <span class="revio-badge revio-badge-pos">Active In Sandbox</span>
+                  </div>
+                  <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: center;">
+                    <thead>
+                      <tr style="color: var(--revio-text-secondary); border-bottom: 1px solid var(--revio-border);">
+                        <th style="padding: 6px; text-align: left;">Actual \ Pred</th>
+                        <th style="padding: 6px; color: #EF4444;">Pred Neg</th>
+                        <th style="padding: 6px; color: #10B981;">Pred Pos</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style="border-bottom: 1px solid var(--revio-border);">
+                        <td style="padding: 8px; text-align: left; font-weight: 600;">Actual Neg</td>
+                        <td style="padding: 8px; background: rgba(239, 68, 68, 0.1); font-weight: 700; color: #EF4444;">17,795 (93.7%)</td>
+                        <td style="padding: 8px; color: var(--revio-text-secondary);">1,205 (6.3%)</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 8px; text-align: left; font-weight: 600;">Actual Pos</td>
+                        <td style="padding: 8px; color: var(--revio-text-secondary);">1,680 (8.8%)</td>
+                        <td style="padding: 8px; background: rgba(16, 185, 129, 0.1); font-weight: 700; color: #10B981;">17,320 (91.2%)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div style="margin-top: 12px; font-size: 11px; color: var(--revio-text-secondary); font-family: var(--font-mono);">
+                    Accuracy: <strong>92.4%</strong> &middot; Negative Recall: <strong>93.7%</strong>
+                  </div>
+                </div>
+
+                <!-- Bi-LSTM Matrix -->
+                <div style="border: 1px solid var(--revio-border); border-radius: 10px; padding: 16px; background: var(--revio-surface);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <strong style="font-size: 14px;">Bi-LSTM (GloVe 100d)</strong>
+                    <span class="revio-badge revio-badge-pos">Loaded</span>
+                  </div>
+                  <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: center;">
+                    <thead>
+                      <tr style="color: var(--revio-text-secondary); border-bottom: 1px solid var(--revio-border);">
+                        <th style="padding: 6px; text-align: left;">Actual \ Pred</th>
+                        <th style="padding: 6px; color: #EF4444;">Pred Neg</th>
+                        <th style="padding: 6px; color: #10B981;">Pred Pos</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style="border-bottom: 1px solid var(--revio-border);">
+                        <td style="padding: 8px; text-align: left; font-weight: 600;">Actual Neg</td>
+                        <td style="padding: 8px; background: rgba(239, 68, 68, 0.1); font-weight: 700; color: #EF4444;">16,340 (86.0%)</td>
+                        <td style="padding: 8px; color: var(--revio-text-secondary);">2,660 (14.0%)</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 8px; text-align: left; font-weight: 600;">Actual Pos</td>
+                        <td style="padding: 8px; color: var(--revio-text-secondary);">1,520 (8.0%)</td>
+                        <td style="padding: 8px; background: rgba(16, 185, 129, 0.1); font-weight: 700; color: #10B981;">17,480 (92.0%)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div style="margin-top: 12px; font-size: 11px; color: var(--revio-text-secondary); font-family: var(--font-mono);">
+                    Accuracy: <strong>89.0%</strong> &middot; Negative Recall: <strong>86.0%</strong>
+                  </div>
+                </div>
+
+                <!-- BERT Matrix -->
+                <div style="border: 1px solid var(--revio-border); border-radius: 10px; padding: 16px; background: var(--revio-surface);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <strong style="font-size: 14px;">BERT (Fine-Tuned Baseline)</strong>
+                    <span class="revio-badge revio-badge-neutral">Offline Benchmark</span>
+                  </div>
+                  <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: center;">
+                    <thead>
+                      <tr style="color: var(--revio-text-secondary); border-bottom: 1px solid var(--revio-border);">
+                        <th style="padding: 6px; text-align: left;">Actual \ Pred</th>
+                        <th style="padding: 6px; color: #EF4444;">Pred Neg</th>
+                        <th style="padding: 6px; color: #10B981;">Pred Pos</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style="border-bottom: 1px solid var(--revio-border);">
+                        <td style="padding: 8px; text-align: left; font-weight: 600;">Actual Neg</td>
+                        <td style="padding: 8px; background: rgba(239, 68, 68, 0.1); font-weight: 700; color: #EF4444;">16,910 (89.0%)</td>
+                        <td style="padding: 8px; color: var(--revio-text-secondary);">2,090 (11.0%)</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 8px; text-align: left; font-weight: 600;">Actual Pos</td>
+                        <td style="padding: 8px; color: var(--revio-text-secondary);">1,330 (7.0%)</td>
+                        <td style="padding: 8px; background: rgba(16, 185, 129, 0.1); font-weight: 700; color: #10B981;">17,670 (93.0%)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div style="margin-top: 12px; font-size: 11px; color: var(--revio-text-secondary); font-family: var(--font-mono);">
+                    Accuracy: <strong>91.0%</strong> &middot; Negative Recall: <strong>89.0%</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 3: Dataset Specifications -->
+          <div id="modelLabTabDataset" style="display: none;">
+            <div class="revio-card">
+              <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Training &amp; Validation Corpus Metadata</h3>
+              <p style="font-size: 12px; color: var(--revio-text-secondary); margin-bottom: 20px;">Standard benchmark specifications used for model validation and threshold calibration.</p>
+              
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 24px;">
+                <div style="padding: 14px; border: 1px solid var(--revio-border); border-radius: 8px; background: var(--revio-surface-muted);">
+                  <div style="font-size: 11px; text-transform: uppercase; color: var(--revio-text-secondary); font-weight: 600;">Dataset Origin</div>
+                  <div style="font-size: 15px; font-weight: 700; margin-top: 4px;">Yelp Review Polarity</div>
+                  <div style="font-size: 12px; color: var(--revio-text-secondary); margin-top: 4px;">Standard NLP benchmark (Zhang, Zhao, LeCun).</div>
+                </div>
+                <div style="padding: 14px; border: 1px solid var(--revio-border); border-radius: 8px; background: var(--revio-surface-muted);">
+                  <div style="font-size: 11px; text-transform: uppercase; color: var(--revio-text-secondary); font-weight: 600;">Training Corpus</div>
+                  <div style="font-size: 15px; font-weight: 700; margin-top: 4px;">560,000 Samples</div>
+                  <div style="font-size: 12px; color: var(--revio-text-secondary); margin-top: 4px;">280K Negative (1-2★) / 280K Positive (4-5★).</div>
+                </div>
+                <div style="padding: 14px; border: 1px solid var(--revio-border); border-radius: 8px; background: var(--revio-surface-muted);">
+                  <div style="font-size: 11px; text-transform: uppercase; color: var(--revio-text-secondary); font-weight: 600;">Held-out Test Split</div>
+                  <div style="font-size: 15px; font-weight: 700; margin-top: 4px;">38,000 Reviews</div>
+                  <div style="font-size: 12px; color: var(--revio-text-secondary); margin-top: 4px;">Strictly held-out for unbiased metric verification.</div>
+                </div>
+                <div style="padding: 14px; border: 1px solid var(--revio-border); border-radius: 8px; background: var(--revio-surface-muted);">
+                  <div style="font-size: 11px; text-transform: uppercase; color: var(--revio-text-secondary); font-weight: 600;">Class Balance</div>
+                  <div style="font-size: 15px; font-weight: 700; margin-top: 4px;">50.0% / 50.0%</div>
+                  <div style="font-size: 12px; color: var(--revio-text-secondary); margin-top: 4px;">Zero class imbalance skew; 3★ ambiguous omitted.</div>
+                </div>
+              </div>
+
+              <div style="font-size: 13px; color: var(--revio-text-secondary); line-height: 1.6;">
+                <strong>Preprocessing Pipeline:</strong> UTF-8 normalization, lowercase conversion, alphanumeric and apostrophe token preservation, character n-gram shingling (range: 3–5) to capture slang elongations (e.g. <em>"soooo slooow"</em>), and sublinear TF-IDF scaling (<span style="font-family: var(--font-mono);">1 + log(tf)</span>) with L2 feature vector normalization.
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 4: Architecture Details -->
+          <div id="modelLabTabDetails" style="display: none;">
+            <div class="revio-card">
+              <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Architecture &amp; Serving Profiles</h3>
+              <p style="font-size: 12px; color: var(--revio-text-secondary); margin-bottom: 20px;">Hardware requirements, inference speeds, and parameter allocations for production deployment.</p>
+              
+              <div style="display: flex; flex-direction: column; gap: 14px;">
+                <div style="padding: 14px; border-left: 3px solid var(--revio-violet); background: var(--revio-surface-muted); border-radius: 0 8px 8px 0;">
+                  <strong style="font-size: 14px; color: var(--revio-text);">Logistic Regression (Fast-Path Singleton)</strong>
+                  <div style="display: flex; gap: 20px; font-size: 12px; font-family: var(--font-mono); margin-top: 6px; color: var(--revio-text-secondary);">
+                    <span>Inference: <strong>~8.7 ms</strong></span>
+                    <span>Memory: <strong>18.4 MB</strong></span>
+                    <span>Explainability: <strong>Direct Feature Weights (TF-IDF &times; &beta;)</strong></span>
+                  </div>
+                  <p style="font-size: 12.5px; color: var(--revio-text-secondary); margin: 6px 0 0;">Pre-warmed in FastAPI worker threadpool. Ideal for zero cold-start latency, real-time live interactive typing, and explainable compliance auditing.</p>
+                </div>
+
+                <div style="padding: 14px; border-left: 3px solid #8970D6; background: var(--revio-surface-muted); border-radius: 0 8px 8px 0;">
+                  <strong style="font-size: 14px; color: var(--revio-text);">Bidirectional LSTM (Sequence Context)</strong>
+                  <div style="display: flex; gap: 20px; font-size: 12px; font-family: var(--font-mono); margin-top: 6px; color: var(--revio-text-secondary);">
+                    <span>Inference: <strong>~45.2 ms</strong></span>
+                    <span>Memory: <strong>86.2 MB</strong></span>
+                    <span>Embeddings: <strong>GloVe 100-dimensional</strong></span>
+                  </div>
+                  <p style="font-size: 12.5px; color: var(--revio-text-secondary); margin: 6px 0 0;">Sequential recurrent architecture capturing multi-phrase context and long-range negation dependencies (e.g. <em>"not what I expected at all"</em>).</p>
+                </div>
+
+                <div style="padding: 14px; border-left: 3px solid #3B82F6; background: var(--revio-surface-muted); border-radius: 0 8px 8px 0;">
+                  <strong style="font-size: 14px; color: var(--revio-text);">Fine-Tuned BERT (Transformer Baseline)</strong>
+                  <div style="display: flex; gap: 20px; font-size: 12px; font-family: var(--font-mono); margin-top: 6px; color: var(--revio-text-secondary);">
+                    <span>Inference: <strong>~182 ms (CPU)</strong></span>
+                    <span>Memory: <strong>420 MB</strong></span>
+                    <span>Parameters: <strong>66 Million (DistilBERT)</strong></span>
+                  </div>
+                  <p style="font-size: 12.5px; color: var(--revio-text-secondary); margin: 6px 0 0;">Held-out deep transformer baseline for high-complexity arbitration when fast-path confidence falls into the ambiguity corridor.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==============================================================
+             10 — SETTINGS (Screen 10, matching 10_settings.png)
+             ============================================================== -->
+        <section id="sec-settings" style="display: none;">
+          <div class="revio-page-header">
+            <div>
+              <h1 class="revio-page-title">Settings</h1>
+              <p class="revio-page-subtitle">Manage your workspace, data and preferences.</p>
+            </div>
+          </div>
+
+          <div class="revio-settings-layout">
+            <!-- Left Sub-Navigation -->
+            <div class="revio-settings-nav">
+              <button class="revio-settings-nav-btn active" onclick="switchSettingsTab('workspace', this)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 6px;"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Workspace
+              </button>
+              <button class="revio-settings-nav-btn" onclick="switchSettingsTab('appearance', this)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line></svg>
+                Appearance
+              </button>
+              <button class="revio-settings-nav-btn" onclick="switchSettingsTab('privacy', this)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 6px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                Data &amp; privacy
+              </button>
+              <button class="revio-settings-nav-btn" onclick="switchSettingsTab('models', this)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 6px;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                Model preferences
+              </button>
+              <button class="revio-settings-nav-btn" onclick="switchSettingsTab('notifications', this)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 6px;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                Notifications
+              </button>
+              <button class="revio-settings-nav-btn" onclick="switchSettingsTab('integrations', this)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                Integrations
+              </button>
+            </div>
+
+            <!-- Right Form Panel (10_settings.png) -->
+            <div class="revio-card">
+              <!-- Sub-tab 1: Workspace -->
+              <div id="settingsTabWorkspace">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 20px;">Workspace</h3>
+
+                <div class="revio-field-group">
+                  <label class="revio-field-label">Workspace name</label>
+                  <div style="display: flex; gap: 12px;">
+                    <input type="text" id="settingsWorkspaceName" class="revio-textarea" style="height: 42px; margin-bottom: 0; max-width: 360px;" value="Demo workspace">
+                    <button class="revio-btn revio-btn-primary" onclick="saveWorkspaceSettings()">Update</button>
+                  </div>
+                </div>
+
+                <div class="revio-field-group" style="margin-top: 20px;">
+                  <label class="revio-field-label">Industry</label>
+                  <select id="settingsIndustrySelect" class="revio-select" style="max-width: 360px;" onchange="saveWorkspaceSettings()">
+                    <option value="Hospitality">Hospitality</option>
+                    <option value="Property Management">Property Management (PropTech)</option>
+                    <option value="Dining">Restaurants &amp; Dining</option>
+                    <option value="Retail">Retail &amp; E-Commerce</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Sub-tab 2: Appearance -->
+              <div id="settingsTabAppearance" style="display: none;">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px;">Appearance &amp; Theme</h3>
+                <p style="font-size: 12.5px; color: var(--revio-text-secondary); margin-bottom: 20px;">Customize color schemes and contrast modes across your entire Revio session.</p>
+
+                <!-- Segmented Theme Buttons -->
+                <div class="revio-field-group">
+                  <label class="revio-field-label">Interface Theme</label>
+                  <div class="revio-segmented-group">
+                    <button class="revio-segment-btn active" id="themeBtnLight" onclick="setTheme('light')">Light</button>
+                    <button class="revio-segment-btn" id="themeBtnDark" onclick="setTheme('dark')">Dark</button>
+                    <button class="revio-segment-btn" id="themeBtnSystem" onclick="setTheme('system')">System</button>
+                  </div>
+                </div>
+
+                <!-- 6 Primary Color Dots from 10_settings.png -->
+                <div class="revio-field-group" style="margin-top: 24px;">
+                  <label class="revio-field-label">Brand Accent Colour</label>
+                  <div class="revio-color-picker-row">
+                    <div class="revio-color-circle active" data-color="#8970d6" style="background: #8970d6;" onclick="setAccentColor('#8970d6')" title="Violet"></div>
+                    <div class="revio-color-circle" data-color="#3b82f6" style="background: #3b82f6;" onclick="setAccentColor('#3b82f6')" title="Blue"></div>
+                    <div class="revio-color-circle" data-color="#6366f1" style="background: #6366f1;" onclick="setAccentColor('#6366f1')" title="Indigo"></div>
+                    <div class="revio-color-circle" data-color="#0d9488" style="background: #0d9488;" onclick="setAccentColor('#0d9488')" title="Teal"></div>
+                    <div class="revio-color-circle" data-color="#d97706" style="background: #d97706;" onclick="setAccentColor('#d97706')" title="Amber"></div>
+                    <div class="revio-color-circle" data-color="#e11d48" style="background: #e11d48;" onclick="setAccentColor('#e11d48')" title="Rose"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Sub-tab 3: Data & Privacy -->
+              <div id="settingsTabPrivacy" style="display: none;">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px;">Data &amp; Privacy</h3>
+                <p style="font-size: 13px; color: var(--revio-text-secondary); line-height: 1.6; margin-bottom: 20px;">
+                  Revio processes reviews locally and through secure in-memory prediction singletons. No customer data is shared, sold, or trained upon without express consent.
+                </p>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                  <button class="revio-btn revio-btn-secondary" onclick="exportCsvReport()">Export Audit Log (CSV)</button>
+                  <button class="revio-btn revio-btn-secondary" onclick="resetSessionReviews()" style="color: #EF4444;">Reset Session Cache</button>
+                </div>
+              </div>
+
+              <!-- Sub-tab 4: Model Preferences -->
+              <div id="settingsTabModels" style="display: none;">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px;">Model &amp; Inference Preferences</h3>
+                <div class="revio-field-group">
+                  <label class="revio-field-label">Active Inference Engine</label>
+                  <div style="font-size: 13px; color: var(--revio-text); margin-bottom: 8px;">
+                    <strong>Fast-Path Singleton:</strong> Logistic Regression (Word + Char N-Grams)
+                  </div>
+                  <p style="font-size: 12px; color: var(--revio-text-secondary); margin: 0 0 16px;">Evaluated on Yelp Review Polarity held-out test split (92.4% accuracy, 93.7% negative recall).</p>
+                </div>
+
+                <div class="revio-field-group">
+                  <label class="revio-field-label">Decision Threshold for Negative Escalation</label>
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <input type="range" min="0.40" max="0.60" step="0.01" value="0.48" id="settingsThresholdSlider" oninput="document.getElementById('settingsThresholdVal').textContent = (this.value * 100).toFixed(0) + '%'" style="flex: 1; max-width: 280px;">
+                    <span style="font-size: 14px; font-weight: 700; font-family: var(--font-mono);" id="settingsThresholdVal">48%</span>
+                  </div>
+                  <span style="font-size: 11px; color: var(--revio-text-secondary);">Polarities below this value automatically trigger triage escalation.</span>
+                </div>
+              </div>
+
+              <!-- Sub-tab 5: Notifications -->
+              <div id="settingsTabNotifications" style="display: none;">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px;">Notification Channels</h3>
+                <p style="font-size: 12.5px; color: var(--revio-text-secondary); margin-bottom: 20px;">Receive automatic real-time alerts when reviews enter the operational friction triage queue.</p>
+
+                <div class="revio-field-group">
+                  <label class="revio-field-label">Webhook Destination URL</label>
+                  <div style="display: flex; gap: 12px;">
+                    <input type="text" class="revio-textarea" style="height: 40px; margin-bottom: 0; max-width: 420px;" placeholder="https://api.yourcompany.com/webhooks/revio" value="https://api.cynbit.internal/webhooks/triage">
+                    <button class="revio-btn revio-btn-secondary" onclick="showToast('Webhook ping sent successfully (200 OK)', 'success')">Test Ping</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Sub-tab 6: Integrations -->
+              <div id="settingsTabIntegrations" style="display: none;">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px;">Platform Integrations</h3>
+                <p style="font-size: 12.5px; color: var(--revio-text-secondary); margin-bottom: 20px;">Manage connected customer review sources and automated sync frequency.</p>
+
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border: 1px solid var(--revio-border); border-radius: 8px;">
+                    <div>
+                      <strong style="font-size: 13.5px;">Google Business Profile</strong>
+                      <div style="font-size: 11.5px; color: var(--revio-text-secondary);">Direct review sync every 15 minutes</div>
+                    </div>
+                    <span class="revio-badge revio-badge-pos">Connected</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border: 1px solid var(--revio-border); border-radius: 8px;">
+                    <div>
+                      <strong style="font-size: 13.5px;">Yelp Fusion API</strong>
+                      <div style="font-size: 11.5px; color: var(--revio-text-secondary);">Hourly polling for new venue reviews</div>
+                    </div>
+                    <span class="revio-badge revio-badge-pos">Connected</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border: 1px solid var(--revio-border); border-radius: 8px;">
+                    <div>
+                      <strong style="font-size: 13.5px;">TripAdvisor Partner API</strong>
+                      <div style="font-size: 11.5px; color: var(--revio-text-secondary);">Hospitality &amp; booking review ingestion</div>
+                    </div>
+                    <span class="revio-badge revio-badge-neutral">Standby</span>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       INTERACTIVE MODALS
+       ====================================================================== -->
+  <!-- Watch Demo Walkthrough Modal -->
+  <div id="watchDemoModal" class="revio-modal-backdrop" style="display: none;">
+    <div class="revio-modal">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+        <div>
+          <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 4px;">Revio Product Tour</h2>
+          <p style="font-size: 13px; color: var(--revio-text-secondary);">How Revio converts raw reviews into customer insights.</p>
+        </div>
+        <button onclick="closeWatchDemoModal()" style="font-size: 20px; color: var(--revio-text-secondary);">&times;</button>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px; font-size: 13px; line-height: 1.5; margin-bottom: 24px;">
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <span class="revio-badge revio-badge-pos">1</span>
+          <div>
+            <strong>Automated Ingestion &amp; Mapping</strong>
+            <p style="color: var(--revio-text-secondary); margin-top: 2px;">Upload CSV feedback or paste text. Revio validates columns and cleans noisy text instantly.</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <span class="revio-badge revio-badge-mixed">2</span>
+          <div>
+            <strong>In-Domain Sentiment &amp; Triage Scoring</strong>
+            <p style="color: var(--revio-text-secondary); margin-top: 2px;">The Yelp-trained Word+Char hybrid model predicts sentiment with 92.4% accuracy and flags critical complaints for supervisor attention.</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <span class="revio-badge revio-badge-pos">3</span>
+          <div>
+            <strong>Actionable Review Inbox &amp; Attribution Cues</strong>
+            <p style="color: var(--revio-text-secondary); margin-top: 2px;">Inspect exact word-level contributions ($\text{TF-IDF} \times \beta$) explaining why the model flagged each issue.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 12px;">
+        <button class="revio-btn revio-btn-secondary" onclick="closeWatchDemoModal()">Close</button>
+        <button class="revio-btn revio-btn-primary" onclick="closeWatchDemoModal(); runSampleAnalysis();">Launch Interactive Demo &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Technical Explanation Modal -->
+  <div id="techExplanationModal" class="revio-modal-backdrop" style="display: none;">
+    <div class="revio-modal">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+        <div>
+          <h2 style="font-size: 18px; font-weight: 700;">Technical Model Attribution Details</h2>
+          <p style="font-size: 13px; color: var(--revio-text-secondary);">Linear explainability via feature coefficient multiplication.</p>
+        </div>
+        <button onclick="closeTechExplanationModal()" style="font-size: 20px; color: var(--revio-text-secondary);">&times;</button>
+      </div>
+
+      <div style="font-size: 13px; line-height: 1.6; color: var(--revio-text); margin-bottom: 20px;">
+        <p style="margin-bottom: 12px;">
+          Revio computes instance-level feature attribution by extracting active unigrams, bigrams, and character 3–5 grams from the input text, calculating their term frequency-inverse document frequency ($\text{TF-IDF}$), and multiplying each by its linear logistic regression coefficient:
+        </p>
+        <div style="font-family: var(--font-mono); background: var(--revio-surface-muted); padding: 12px; border-radius: var(--radius-control); margin-bottom: 12px;">
+          Contribution(term) = TF-IDF(term, doc) &times; &beta;(term)
+        </div>
+        <p style="color: var(--revio-text-secondary); margin-bottom: 8px;">
+          These weights are raw linear log-odds contributions ($X_j \beta_j$) in logit space. They are distinct from the review's estimated positive-class probability, which applies the logistic sigmoid function $\sigma(z) = 1 / (1 + e^{-z})$ over the sum of all linear contributions plus the bias term $\beta_0$.
+        </p>
+        <p style="color: var(--revio-text-secondary);">
+          Terms with positive weights pull the logit toward positive sentiment; negative weights pull toward complaint escalation.
+        </p>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end;">
+        <button class="revio-btn revio-btn-primary" onclick="closeTechExplanationModal()">Got it</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="revio-toast-container" id="toastContainer"></div>
+
+  <!-- Engine Script -->
+  <script src="js/revio-3d-scene.js"></script>
+  <script src="js/revio-app.js"></script>
+</body>
+</html>

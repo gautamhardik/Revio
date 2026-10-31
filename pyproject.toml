@@ -1,0 +1,6 @@
+[tool.pyright]
+extraPaths = [".", "ml_service"]
+
+[tool.pyrefly]
+search_paths = [".", "ml_service"]
+

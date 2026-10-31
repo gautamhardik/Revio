@@ -1,0 +1,11 @@
+{
+  "python.analysis.extraPaths": [
+    "./ml_service",
+    "${workspaceFolder}/ml_service"
+  ],
+  "python.autoComplete.extraPaths": [
+    "./ml_service",
+    "${workspaceFolder}/ml_service"
+  ],
+  "python.envFile": "${workspaceFolder}/.env"
+}

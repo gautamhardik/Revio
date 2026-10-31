@@ -1,0 +1,26 @@
+.venv/
+__pycache__/
+*.pyc
+node_modules/
+notebooks/
+.ipynb_checkpoints/
+.DS_Store
+backend/prisma/dev.db
+*.egg-info/
+dist/
+build/
+.tuner_dir/
+# Exclude untuned BERT model (not needed for inference)
+models_bert/model.safetensors
+models_bert/config.json
+models_bert/tokenizer.json
+models_bert/tokenizer_config.json
+models_bert/special_tokens_map.json
+models_bert/training_config.json
+models_bert/threshold.pkl
+# Training data not needed for deployment
+data/cleaned_imdb.csv
+
+.env
+.pytest_cache/
+v/

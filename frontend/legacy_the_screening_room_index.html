@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Screening Room - AI Film Critics</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="marquee-border top-marquee">
+        <div class="lights"></div>
+    </div>
+
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="index.html" class="nav-logo" aria-label="Home">
+                    <img src="film_reel.png" class="film-reel-icon" alt="The Screening Room Logo">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Film Critics (IMDb)</a>
+                <span class="nav-divider">|</span>
+                <a href="revio.html" class="nav-link">Revio Business Review</a>
+                <span class="nav-divider">|</span>
+                <a href="inside.html" class="nav-link">Inside Engine</a>
+                <span class="nav-divider">|</span>
+                <a href="https://github.com/gautamhardik/Sentiment-Analysis" class="nav-link" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="header">
+            <h1 class="logo">The Screening Room</h1>
+            <p class="tagline">Three Critics. One Review. Three Perspectives.</p>
+        </header>
+
+        <section class="input-section">
+            <div class="ticket">
+                <div class="ticket-header">
+                    <h2>Submit a Movie Review</h2>
+                    <span class="ticket-stub">ADMIT ONE</span>
+                </div>
+                <div class="ticket-body">
+                    <textarea id="reviewInput" placeholder="Type or paste a movie review here... e.g. 'This movie was absolutely brilliant but the ending ruined everything.'"></textarea>
+                    <div class="error-message" id="errorMessage"></div>
+                </div>
+                <div class="ticket-footer">
+                    <button id="analyzeBtn" class="analyze-btn">Analyze Review</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-section" id="featuredSection">
+            <div class="featured-header">
+                <h2>Featured Screenings</h2>
+                <p class="featured-subtitle">Try one of these sample reviews</p>
+            </div>
+            <div class="featured-grid" id="featuredGrid">
+                <!-- Cards injected by JS -->
+            </div>
+        </section>
+
+        <section class="results-section hidden" id="resultsSection">
+            <div class="verdict-banner" id="verdictBanner">
+                <div class="verdict-divider"><span class="verdict-divider-icon">✦</span></div>
+                <h3>Overall Verdict</h3>
+                <div class="stamp" id="verdictStamp">APPROVED</div>
+                <div class="verdict-meta">
+                    <span class="agreement">Agreement: <strong id="verdictAgreement">3/3</strong></span>
+                    <span class="meta-sep">•</span>
+                    <span class="timing">Analysis: <strong id="timingMs">0</strong>ms</span>
+                </div>
+                <div class="verdict-divider"><span class="verdict-divider-icon">✦</span></div>
+            </div>
+
+            <div class="critics-grid">
+                <!-- LR Critic -->
+                <div class="critic-card" id="criticLr">
+                    <div class="critic-header">
+                        <h4>The Statistician</h4>
+                        <span class="model-type">Logistic Regression</span>
+                    </div>
+                    <div class="critic-body">
+                        <div class="prediction-chip positive">Positive</div>
+                        <div class="confidence">
+                            <div class="confidence-header">
+                                <span>Confidence</span>
+                                <span class="conf-value">85%</span>
+                            </div>
+                            <div class="confidence-bar-bg">
+                                <div class="confidence-bar-fill" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <p class="reasoning">Explanation goes here.</p>
+                        
+                        <div class="keywords">
+                            <div class="keyword-group pos-keywords">
+                                <h5>Positive Cues</h5>
+                                <ul></ul>
+                            </div>
+                            <div class="keyword-group neg-keywords">
+                                <h5>Negative Cues</h5>
+                                <ul></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="critic-footer">Latency: <span>2ms</span></div>
+                </div>
+
+                <!-- BERT Critic -->
+                <div class="critic-card" id="criticBert">
+                    <div class="critic-header">
+                        <h4>The Contextualist</h4>
+                        <span class="model-type">BERT (Fine-Tuned)</span>
+                    </div>
+                    <div class="critic-body">
+                        <div class="prediction-chip positive">Positive</div>
+                        <div class="confidence">
+                            <div class="confidence-header">
+                                <span>Confidence</span>
+                                <span class="conf-value">85%</span>
+                            </div>
+                            <div class="confidence-bar-bg">
+                                <div class="confidence-bar-fill" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <p class="reasoning">Explanation goes here.</p>
+                    </div>
+                    <div class="critic-footer">Latency: <span>400ms</span></div>
+                </div>
+
+                <!-- LSTM Critic -->
+                <div class="critic-card" id="criticLstm">
+                    <div class="critic-header">
+                        <h4>The Sequentialist</h4>
+                        <span class="model-type">Bi-LSTM</span>
+                    </div>
+                    <div class="critic-body">
+                        <div class="prediction-chip positive">Positive</div>
+                        <div class="confidence">
+                            <div class="confidence-header">
+                                <span>Confidence</span>
+                                <span class="conf-value">85%</span>
+                            </div>
+                            <div class="confidence-bar-bg">
+                                <div class="confidence-bar-fill" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <p class="reasoning">Explanation goes here.</p>
+                    </div>
+                    <div class="critic-footer">Latency: <span>120ms</span></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="loading-overlay hidden" id="loadingOverlay">
+            <div class="spinner"></div>
+            <p>The critics are evaluating your review...</p>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

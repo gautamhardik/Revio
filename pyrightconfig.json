@@ -1,0 +1,12 @@
+{
+  "include": [
+    ".",
+    "ml_service",
+    "tests"
+  ],
+  "extraPaths": [
+    ".",
+    "ml_service"
+  ]
+}
+

@@ -1,0 +1,48 @@
+# Vercel Deployment Exclusions
+# Exclude heavy deep learning models and legacy artifacts (> 1.5 GB)
+models_bert/
+models_lstm/
+models_ml/
+revio_business_review_experiment/
+data/
+experiments/
+
+# Exclude legacy local microservice backends (FastAPI is consolidated into api/index.py)
+backend/
+ml_service/
+
+# Exclude documentation, tests, and evaluation scripts
+tests/
+scripts/
+docs/
+*.md
+LICENSE
+
+# Exclude temporary, cache, and editor files
+.pytest_cache/
+.vscode/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env*
+!.env.example
+v/
+CACHEDIR.TAG
+
+# Exclude container files
+Dockerfile*
+docker-compose*.yml
+supervisord.conf
+nginx.conf
+hf_start.sh
+cynbit_triage_results.csv
+
+# Exclude legacy screening room cinema files in frontend
+frontend/_threeui_backup/
+frontend/legacy_the_screening_room_index.html
+frontend/inside.html
+frontend/inside.js
+frontend/app.js
+frontend/style.css
+frontend/film_reel.png

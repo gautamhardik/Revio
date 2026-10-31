@@ -1,0 +1,115 @@
+:root {
+  /* Brand environments */
+  --revio-ink-deep: #07090e;
+  --revio-ink: #0d111a;
+  --revio-sidebar: #0f121d;
+
+  /* Working application surfaces (Luxury Alabaster Pearl Light Mode) */
+  --revio-canvas: #f8fafc;
+  --revio-surface: #ffffff;
+  --revio-surface-muted: #f1f5f9;
+  --revio-border: rgba(15, 23, 42, 0.08);
+  --revio-border-strong: rgba(15, 23, 42, 0.16);
+
+  /* Text */
+  --revio-text: #0f172a;
+  --revio-text-secondary: #475569;
+  --revio-text-tertiary: #94a3b8;
+  --revio-text-on-dark: #f8fafc;
+  --revio-text-muted-on-dark: #94a3b8;
+
+  /* Brand accents */
+  --revio-violet: #7c3aed;
+  --revio-violet-hover: #6d28d9;
+  --revio-violet-soft: #ede9fe;
+  --revio-champagne: #d97706;
+  --revio-champagne-soft: #fef3c7;
+
+  /* Semantic statuses */
+  --revio-positive: #10b981;
+  --revio-positive-soft: #ecfdf5;
+  --revio-mixed: #f59e0b;
+  --revio-mixed-soft: #fffbeb;
+  --revio-negative: #ef4444;
+  --revio-negative-soft: #fef2f2;
+  --revio-info: #3b82f6;
+  --revio-info-soft: #eff6ff;
+
+  /* Gradients */
+  --revio-gradient-primary: linear-gradient(135deg, #7c3aed 0%, #6366f1 50%, #3b82f6 100%);
+  --revio-gradient-glow: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.15), transparent 70%);
+
+  /* Typography */
+  --font-ui: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "DM Serif Display", Georgia, "Times New Roman", serif;
+  --font-mono: ui-monospace, SFMono-Regular, "Geist Mono", Consolas, monospace;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* Geometry */
+  --sidebar-width: 244px;
+  --topbar-height: 68px;
+  --content-max: 1340px;
+  --radius-control: 10px;
+  --radius-card: 16px;
+  --radius-panel: 20px;
+  --radius-full: 9999px;
+  --radius-pill: 9999px;
+
+  /* Borders and elevations */
+  --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-hover: 0 12px 32px -4px rgba(15, 23, 42, 0.1), 0 2px 6px rgba(15, 23, 42, 0.04);
+  --shadow-popover: 0 20px 48px -6px rgba(15, 23, 42, 0.15);
+  --focus-ring: 0 0 0 3px rgba(124, 58, 237, 0.25);
+
+  /* Motion */
+  --motion-fast: 140ms;
+  --motion-normal: 200ms;
+  --motion-panel: 280ms;
+  --motion-hero: 480ms;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-emphasis: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* =========================================================================
+   DARK THEME VARIABLES (Cinematic Obsidian Glass)
+   ========================================================================= */
+[data-theme="dark"] {
+  --revio-sidebar: #090b11;
+  --revio-canvas: #05070b;
+  --revio-surface: #0e111a;
+  --revio-surface-muted: #141824;
+  --revio-border: rgba(255, 255, 255, 0.08);
+  --revio-border-strong: rgba(255, 255, 255, 0.16);
+
+  --revio-text: #f8fafc;
+  --revio-text-secondary: #94a3b8;
+  --revio-text-tertiary: #64748b;
+  --revio-text-on-dark: #f8fafc;
+  --revio-text-muted-on-dark: #94a3b8;
+
+  --shadow-card: 0 8px 32px -4px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --shadow-hover: 0 16px 48px -8px rgba(0, 0, 0, 0.8), 0 0 24px -4px rgba(124, 58, 237, 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+

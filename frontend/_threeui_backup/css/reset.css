@@ -1,0 +1,256 @@
+/* ==========================================================================
+   REVIO DESIGN SYSTEM — Reset
+   Version: 1.0.0
+   
+   Minimal, modern CSS reset. Depends on tokens.css for custom properties.
+   ========================================================================== */
+
+/* -----------------------------------------------------------------------
+   Box Model
+   ----------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* -----------------------------------------------------------------------
+   Remove default margins and padding
+   ----------------------------------------------------------------------- */
+*{
+  margin: 0;
+  padding: 0;
+}
+
+/* -----------------------------------------------------------------------
+   Document
+   ----------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  tab-size: 4;
+  font-size: 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* -----------------------------------------------------------------------
+   Body
+   ----------------------------------------------------------------------- */
+body {
+  font-family: var(--rv-font-sans);
+  font-size: var(--rv-text-base);
+  line-height: var(--rv-leading-normal);
+  font-weight: var(--rv-weight-normal);
+  color: var(--rv-text-primary);
+  background-color: var(--rv-bg-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* -----------------------------------------------------------------------
+   Typography resets
+   ----------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+b, strong {
+  font-weight: var(--rv-weight-bold);
+}
+
+small {
+  font-size: 80%;
+}
+
+code, kbd, samp, pre {
+  font-family: var(--rv-font-mono);
+  font-size: 1em;
+}
+
+/* -----------------------------------------------------------------------
+   Media elements
+   ----------------------------------------------------------------------- */
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  vertical-align: middle;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* -----------------------------------------------------------------------
+   Lists
+   ----------------------------------------------------------------------- */
+ol,
+ul,
+menu {
+  list-style: none;
+}
+
+/* -----------------------------------------------------------------------
+   Tables
+   ----------------------------------------------------------------------- */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* -----------------------------------------------------------------------
+   Forms — Buttons & Inputs
+   ----------------------------------------------------------------------- */
+button,
+input,
+optgroup,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+button,
+[role="button"] {
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+button:disabled,
+[role="button"]:disabled {
+  cursor: not-allowed;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--rv-text-tertiary);
+  opacity: 1;
+}
+
+textarea {
+  resize: vertical;
+}
+
+select {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Remove inner spin buttons on number inputs */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Remove search input decoration */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+/* -----------------------------------------------------------------------
+   Focus — Accessible focus-visible outlines
+   ----------------------------------------------------------------------- */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--rv-accent);
+  outline-offset: 2px;
+  border-radius: var(--rv-radius-sm);
+}
+
+/* -----------------------------------------------------------------------
+   Selection
+   ----------------------------------------------------------------------- */
+::selection {
+  background-color: var(--rv-accent-muted);
+  color: var(--rv-text-primary);
+}
+
+/* -----------------------------------------------------------------------
+   Scrollbar (Webkit / Chromium)
+   ----------------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--rv-bg-subtle);
+  border-radius: var(--rv-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--rv-text-tertiary);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--rv-bg-subtle) transparent;
+}
+
+/* -----------------------------------------------------------------------
+   Misc
+   ----------------------------------------------------------------------- */
+hr {
+  border: none;
+  border-top: 1px solid var(--rv-border-default);
+  height: 0;
+}
+
+abbr[title] {
+  text-decoration: underline dotted;
+}
+
+dialog {
+  padding: 0;
+}
+
+summary {
+  display: list-item;
+  cursor: pointer;
+}
+
+[hidden] {
+  display: none !important;
+}
