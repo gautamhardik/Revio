@@ -1705,3 +1705,42 @@
 ### Current State & Next Steps
 - **Current State:** Phase 2C is complete and operational. Revio is in production on Vercel Edge Network and Serverless Functions with 100% verified test and browser user journey pass rates.
 - **Next Steps:** Provide final completion report and live links to user.
+
+---
+
+## 2026-10-31 - Post-Deployment CSV Processing Enhancements & Benchmark Evaluation
+
+### Request & Rationale
+1. **IDE Import Warning:** User reported `Cannot find module 'app.api.revio_routes'` in `tests/test_revio_phase2a_gate.py` with yellow `[Select Python Interpreter]` prompt in Antigravity IDE.
+2. **CSV Processing UI Counter:** User asked if CSV analysis was hardcoded to 2,500 reviews because their custom 50-review upload showed "Processing review X of 2,500".
+3. **CSV Schema Specification:** User asked what structure is required for CSV processing and whether any CSV format is supported.
+4. **Benchmark Evaluation:** User provided a 22-row multi-domain test CSV (`revio_business_reviews_test_sample.csv`) spanning positive, negative, mixed, ambiguous, out-of-domain, emoji, and invalid rows.
+
+### Actions Performed & Files Changed
+1. **Dynamic CSV Progress Counter & Max Cap Update:**
+   - **`frontend/js/revio-app.js`**, **`frontend/index.html`**, and **`frontend/revio.html`**:
+     - Identified static mockup placeholder text `<span id="procStage3Span">Analysing sentiment (Processing review 1,642 of 2,500)</span>` that was being revealed during Stage 3 analysis.
+     - Updated `updateProcessingStages()` and `runBatchAnalysis()` to dynamically compute and format: `Processing review ${processedCount + 1}–${Math.min(processedCount + chunk.length, total)} of ${total}`.
+     - Expanded `parseCsvContent()` maximum row limit from 100 to 2,500.
+     - Re-verified binary parity between `frontend/index.html` and `frontend/revio.html` (zero byte differences).
+2. **IDE Path Resolution:**
+   - Updated `.vscode/settings.json`, `pyrightconfig.json`, and `pyproject.toml` with `extraPaths = [".", "ml_service"]`.
+   - Updated `tests/test_revio_phase2a_gate.py` to import from `ml_service.app.api.revio_routes` with fallback to `app.api.revio_routes`.
+3. **Test Suite Isolation:**
+   - Updated `tests/test_revio_vercel_architecture.py` (`test_vercel_app_initialization_runtime_isolation`) to verify clean absence of `torch`, `tensorflow`, and `keras` inside an isolated subprocess, preventing cross-test pollution from historical deep learning tests.
+   - All 11 Vercel architecture tests pass cleanly in 8.35s.
+4. **Benchmark Evaluation of User's 22-Row Test CSV:**
+   - Executed `scripts/run_user_test_csv.py` against live Vercel endpoint `https://revio-taupe.vercel.app/api/v1/revio/predict`.
+   - Results recorded in `scripts/user_test_csv_results.json`.
+
+### Verification Results
+- **User's 50-Review Custom CSV:** User's live dashboard screenshot confirms successful completion: 50 reviews analysed, 48.0% positive (24), 52.0% negative (26), 0.0% mixed, with complete theme clustering.
+- **User's 22-Row Test CSV Breakdown:**
+  - Valid rows processed: 20 / 22 (2 invalid short rows `RV021` ("no") and `RV022` ("") correctly filtered).
+  - Clear Positives (`RV001`–`RV003`): 85.9% to 98.1% positive probability &rarr; `LOW PRIORITY / NO HUMAN REVIEW REQUIRED`.
+  - Ambiguity Corridor $[0.40, 0.60]$ (`RV004`, `RV010`): Correctly escalated to `ESCALATE (Ambiguity / Low Confidence)`.
+  - Clear Negatives (`RV005`–`RV008`, `RV018`): 0.3% to 7.9% positive probability &rarr; `ESCALATE (Negative / High Risk)`.
+  - Out-of-Domain Quarantine (`RV014` Telecommunications): Correctly quarantined with `domain_validated: false` &rarr; `ESCALATE (Unvalidated Domain: 'telecommunications' - Requires Human Verification)`.
+  - Unicode Emoji (`RV019` "😋"): Handled seamlessly (99.96% positive).
+- **Deployment Status:** Production live at [https://revio-taupe.vercel.app](https://revio-taupe.vercel.app).
+

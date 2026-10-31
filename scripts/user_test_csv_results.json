@@ -1,0 +1,222 @@
+[
+  {
+    "id": "RV001",
+    "category": "clear_positive",
+    "ref": "positive",
+    "pred_sentiment": "Positive",
+    "pos_prob": 0.8593,
+    "triage": "LOW PRIORITY / NO HUMAN REVIEW REQUIRED",
+    "domain_validated": true,
+    "domain": "restaurant",
+    "latency_ms": 10.319
+  },
+  {
+    "id": "RV002",
+    "category": "clear_positive",
+    "ref": "positive",
+    "pred_sentiment": "Positive",
+    "pos_prob": 0.9601,
+    "triage": "LOW PRIORITY / NO HUMAN REVIEW REQUIRED",
+    "domain_validated": true,
+    "domain": "restaurant",
+    "latency_ms": 7.411
+  },
+  {
+    "id": "RV003",
+    "category": "clear_positive",
+    "ref": "positive",
+    "pred_sentiment": "Positive",
+    "pos_prob": 0.9814,
+    "triage": "LOW PRIORITY / NO HUMAN REVIEW REQUIRED",
+    "domain_validated": true,
+    "domain": "cafe",
+    "latency_ms": 7.265
+  },
+  {
+    "id": "RV004",
+    "category": "clear_positive",
+    "ref": "positive",
+    "pred_sentiment": "Negative",
+    "pos_prob": 0.4693,
+    "triage": "ESCALATE (Ambiguity / Low Confidence)",
+    "domain_validated": true,
+    "domain": "hotel",
+    "latency_ms": 6.914
+  },
+  {
+    "id": "RV005",
+    "category": "clear_negative",
+    "ref": "negative",
+    "pred_sentiment": "Negative",
+    "pos_prob": 0.0089,
+    "triage": "ESCALATE (Negative / High Risk)",
+    "domain_validated": true,
+    "domain": "restaurant",
+    "latency_ms": 7.426
+  },
+  {
+    "id": "RV006",
+    "category": "clear_negative",
+    "ref": "negative",
+    "pred_sentiment": "Negative",
+    "pos_prob": 0.0037,
+    "triage": "ESCALATE (Negative / High Risk)",
+    "domain_validated": true,
+    "domain": "restaurant",
+    "latency_ms": 7.933
+  },
+  {
+    "id": "RV007",
+    "category": "clear_negative",
+    "ref": "negative",
+    "pred_sentiment": "Negative",
+    "pos_prob": 0.079,
+    "triage": "ESCALATE (Negative / High Risk)",
+    "domain_validated": true,
+    "domain": "hotel",
+    "latency_ms": 7.065
+  },
+  {
+    "id": "RV008",
+    "category": "clear_negative",
+    "ref": "negative",
+    "pred_sentiment": "Negative",
+    "pos_prob": 0.003,
+    "triage": "ESCALATE (Negative / High Risk)",
+    "domain_validated": true,
+    "domain": "restaurant",
+    "latency_ms": 5.728
+  },
+  {
+    "id": "RV009",
+    "category": "mixed_signal_binary_model",
+    "ref": "mixed",
+    "pred_sentiment": "Negative",
+    "pos_prob": 0.0424,
+    "triage": "ESCALATE (Negative / High Risk)",
+    "domain_validated": true,
+    "domain": "restaurant",
+    "latency_ms": 7.277
+  },
+  {
+    "id": "RV010",
+    "category": "mixed_signal_binary_model",
+    "ref": "mixed",
+    "pred_sentiment": "Negative",
+    "pos_prob": 0.5453,
+    "triage": "ESCALATE (Ambiguity / Low Confidence)",
+    "domain_validated": true,
+    "domain": "restaurant",
+    "latency_ms": 6.117
+  },
+  {
+    "id": "RV011",
+    "category": "neutral_or_ambiguous",
+    "ref": "neutral",
+    "pred_sentiment": "Negative",
+    "pos_prob": 0.0072,
+    "triage": "ESCALATE (Negative / High Risk)",
+    "domain_validated": true,
+    "domain": "hotel",
+    "latency_ms": 6.781
+  },
+  {
+    "id": "RV012",
+    "category": "short_ambiguous",
+    "ref": "neutral",
+    "pred_sentiment": "Negative",
+    "pos_prob": 0.0412,
+    "triage": "ESCALATE (Negative / High Risk)",
+    "domain_validated": true,
+    "domain": "restaurant",
+    "latency_ms": 5.182
+  },
+  {
+    "id": "RV013",
+    "category": "out_of_domain_text_conflict",
+    "ref": "negative",
+    "pred_sentiment": "Negative",
+    "pos_prob": 0.0322,
+    "triage": "ESCALATE (Negative / High Risk)",
+    "domain_validated": true,
+    "domain": "restaurant",
+    "latency_ms": 6.907
+  },
+  {
+    "id": "RV014",
+    "category": "out_of_domain",
+    "ref": "negative",
+    "pred_sentiment": "Positive",
+    "pos_prob": 0.8365,
+    "triage": "ESCALATE (Unvalidated Domain: Unvalidated Domain: 'telecommunications' - Requires Human Verification)",
+    "domain_validated": false,
+    "domain": "Unvalidated Domain: 'telecommunications'",
+    "latency_ms": 6.99
+  },
+  {
+    "id": "RV015",
+    "category": "adjacent_domain",
+    "ref": "mixed",
+    "pred_sentiment": "Negative",
+    "pos_prob": 0.4768,
+    "triage": "ESCALATE (Ambiguity / Low Confidence)",
+    "domain_validated": false,
+    "domain": "Unvalidated Domain: 'retail'",
+    "latency_ms": 6.47
+  },
+  {
+    "id": "RV016",
+    "category": "adjacent_domain",
+    "ref": "mixed",
+    "pred_sentiment": "Positive",
+    "pos_prob": 0.8632,
+    "triage": "LOW PRIORITY / NO HUMAN REVIEW REQUIRED",
+    "domain_validated": true,
+    "domain": "travel",
+    "latency_ms": 7.388
+  },
+  {
+    "id": "RV017",
+    "category": "recovery_after_problem",
+    "ref": "positive",
+    "pred_sentiment": "Positive",
+    "pos_prob": 0.8995,
+    "triage": "LOW PRIORITY / NO HUMAN REVIEW REQUIRED",
+    "domain_validated": true,
+    "domain": "restaurant",
+    "latency_ms": 7.461
+  },
+  {
+    "id": "RV018",
+    "category": "operational_failure",
+    "ref": "negative",
+    "pred_sentiment": "Negative",
+    "pos_prob": 0.0318,
+    "triage": "ESCALATE (Negative / High Risk)",
+    "domain_validated": true,
+    "domain": "hotel",
+    "latency_ms": 7.935
+  },
+  {
+    "id": "RV019",
+    "category": "unicode_emoji",
+    "ref": "positive",
+    "pred_sentiment": "Positive",
+    "pos_prob": 0.9996,
+    "triage": "LOW PRIORITY / NO HUMAN REVIEW REQUIRED",
+    "domain_validated": true,
+    "domain": "restaurant",
+    "latency_ms": 6.216
+  },
+  {
+    "id": "RV020",
+    "category": "punctuation_and_mixed",
+    "ref": "mixed",
+    "pred_sentiment": "Positive",
+    "pos_prob": 0.6063,
+    "triage": "LOW PRIORITY / NO HUMAN REVIEW REQUIRED",
+    "domain_validated": true,
+    "domain": "cafe",
+    "latency_ms": 6.392
+  }
+]
