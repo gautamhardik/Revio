@@ -3423,6 +3423,11 @@ input, textarea, select {
   color: #DC2626;
 }
 
+.revio-sentiment-pill.mixed {
+  background: #FEF3C7;
+  color: #B45309;
+}
+
 .revio-sentiment-dot {
   width: 6px;
   height: 6px;
@@ -3435,6 +3440,10 @@ input, textarea, select {
 
 .revio-sentiment-dot.neg {
   background: #EF4444;
+}
+
+.revio-sentiment-dot.mixed {
+  background: #F59E0B;
 }
 
 .revio-inbox-review-text {

@@ -1779,4 +1779,33 @@
 - **Data Validation & Pre-Filter:** 2 / 100 rows filtered out before inference (100% precision on empty/short string detection).
 - **UTF-8 Parity:** Accented characters verified at byte level (`\xc3\xa8`, `\xc3\xbb`, `\xc3\xa9`).
 
+---
+
+## 2026-10-31 - Audit Discrepancy Resolution & UI Triage Refinements
+
+### Request & Rationale
+- **Request:** Audit all discrepancies uncovered in the 100-review evaluation and screenshot reviews, and surgically fix them across the application.
+- **Rationale:** Eliminate UI classification bugs where positive reviews were inappropriately labeled with defect categories (e.g. "Facility Defect" on 5-star hotel praise), activate the dead "Mixed" category by routing reviews in the $[0.40, 0.60]$ Ambiguity Corridor to "Mixed", prevent confusion from cumulative cross-batch dataset pollution, and refine table headers and confidence progress meters.
+
+### Actions Performed & Files Changed
+1. **Context-Aware Category Derivation (`frontend/js/revio-app.js`):**
+   - Refactored `deriveCategory(text, sentiment)`:
+     - For `sentiment === 'Positive'`: Derives constructive topics (`Food & Dining`, `Rooms & Amenities`, `Staff & Hospitality`, `Value & Pricing`, `Prompt Service`, `Customer Experience`). Never labels positive feedback with negative defect terms.
+     - For `sentiment === 'Mixed'`: Derives balanced topics (`Food & Dining Quality`, `Room & Facility Comfort`, `Staff & Service`, `Service Pacing`, `Mixed Experience`).
+     - For `sentiment === 'Negative'`: Derives specific defect categories (`Maintenance & Facility`, `Food Quality`, `Billing & Extra Fees`, `Slow Service & Delays`, `Staff Hospitality`).
+2. **Ambiguity Corridor Activation for Mixed Sentiment (`frontend/js/revio-app.js`):**
+   - In `runBatchAnalysis()` and `runSingleAnalysis()`, reviews with positive-class probability in $[0.40, 0.60]$ are now designated as `displaySentiment = 'Mixed'`.
+   - Populated the previously dead `Mixed (0)` filter tab and `0.0% Mixed` Results KPI card.
+   - Ambiguous reviews (e.g. `REV-097` crème brûlée with $P=45.8\%$ and `REV-013` matcha latte with $P=50.1\%$) are now presented truthfully as `● Mixed` with status `Needs review` instead of a misleading hard negative.
+3. **Table Header & Styling Refinements (`frontend/index.html`, `frontend/revio.html`, `frontend/css/revio-app.css`):**
+   - Changed table column `<th style="width: 165px;">SOURCE / ISSUE</th>` to `SOURCE / TOPIC`.
+   - Added CSS styles for `.revio-sentiment-pill.mixed` (amber background `#FEF3C7` and text `#B45309`) and `.revio-sentiment-dot.mixed` (`#F59E0B`).
+   - Maintained 100% byte-for-byte binary parity between `index.html` and `revio.html` (`fc.exe /b` &rarr; zero differences).
+4. **Isolated Dataset Session Management (`frontend/js/revio-app.js`):**
+   - Updated `runBatchAnalysis()` so that each newly imported CSV file sets `state.reviews = allNewReviews` rather than accumulating across unrelated test sessions, ensuring the Results Overview accurately reflects the uploaded batch.
+5. **Vercel Production Deployment:**
+   - Deployed release to Vercel production at [https://revio-taupe.vercel.app](https://revio-taupe.vercel.app).
+   - Automated regression tests verified (22/22 passed in 10.86s).
+
+
 
