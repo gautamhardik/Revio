@@ -1,0 +1,147 @@
+import csv
+from pathlib import Path
+
+reviews_data = [
+    # ---------------------------------------------------------
+    # 1. CLEAR POSITIVE (REV-001 to REV-030) - 30 reviews
+    # ---------------------------------------------------------
+    ("REV-001", "The paneer tikka was smoky and perfectly seasoned, and the staff checked on us without being intrusive. I would happily come back.", "restaurant", 5, "2026-10-01", "Positive", "clear_positive"),
+    ("REV-002", "Fresh ingredients, generous portions, and excellent service. The meal arrived hot and exactly as ordered.", "restaurant", 5, "2026-10-01", "Positive", "clear_positive"),
+    ("REV-003", "The coffee was rich, the seating area was clean, and the barista was friendly. A great place to work for an hour.", "cafe", 5, "2026-10-02", "Positive", "clear_positive"),
+    ("REV-004", "The handmade sourdough bread and almond croissants were phenomenal. Flaky, buttery, and warm straight out of the oven.", "bakery", 5, "2026-10-02", "Positive", "clear_positive"),
+    ("REV-005", "From the valet to checkout, every staff member was polite, attentive, and professional. The infinity pool view was stunning.", "hotel", 5, "2026-10-03", "Positive", "clear_positive"),
+    ("REV-006", "The ribeye steak was cooked to a flawless medium rare with wonderful crusting. Excellent wine pairings recommended by the sommelier.", "restaurant", 5, "2026-10-03", "Positive", "clear_positive"),
+    ("REV-007", "Exceptional massage and steam room amenities. Clean facilities, peaceful atmosphere, and complimentary herbal tea.", "spa", 5, "2026-10-04", "Positive", "clear_positive"),
+    ("REV-008", "Craft cocktails here are on another level. The smoked bourbon old fashioned was beautifully balanced and garnished.", "bar", 5, "2026-10-04", "Positive", "clear_positive"),
+    ("REV-009", "Our hotel room was immaculate, the king bed was extremely comfortable, and blackout curtains ensured a great night of sleep.", "hotel", 5, "2026-10-05", "Positive", "clear_positive"),
+    ("REV-010", "Outstanding seafood paella packed with fresh prawns, mussels, and calamari. Full of authentic saffron flavor.", "restaurant", 5, "2026-10-05", "Positive", "clear_positive"),
+    ("REV-011", "Friendly smiles at the door, rapid seating despite a bustling Friday night, and delicious wood-fired pizzas.", "restaurant", 5, "2026-10-06", "Positive", "clear_positive"),
+    ("REV-012", "Delightful boutique hotel in the historic district. Quiet courtyard, delicious artisanal breakfast, and cozy fireplace lounge.", "hotel", 5, "2026-10-06", "Positive", "clear_positive"),
+    ("REV-013", "The matcha latte was velvety smooth and not overly sweet. Baristas clearly take pride in their craft.", "cafe", 5, "2026-10-07", "Positive", "clear_positive"),
+    ("REV-014", "Top-tier hospitality. The front desk arranged airport transit effortlessly and stored our luggage with zero hassle.", "hotel", 5, "2026-10-07", "Positive", "clear_positive"),
+    ("REV-015", "Crispy fish tacos, tangy slaw, and zesty guacamole. Quick service and reasonable prices for lunchtime.", "restaurant", 5, "2026-10-08", "Positive", "clear_positive"),
+    ("REV-016", "The rooftop lounge has unbeatable panoramic sunset views. Wonderful upbeat music and attentive table service.", "bar", 5, "2026-10-08", "Positive", "clear_positive"),
+    ("REV-017", "Remarkable vegetarian tasting menu. Every single course was creative, colorful, and packed with bold textures.", "restaurant", 5, "2026-10-09", "Positive", "clear_positive"),
+    ("REV-018", "The hotel breakfast buffet offered a tremendous selection of fresh fruits, omelettes made to order, and pastries.", "hotel", 5, "2026-10-09", "Positive", "clear_positive"),
+    ("REV-019", "Cleanest cafe in the neighborhood with fast reliable Wi-Fi, abundant charging outlets, and superb cold brew.", "cafe", 5, "2026-10-10", "Positive", "clear_positive"),
+    ("REV-020", "The host greeted us warmly and accommodated our party of eight without an advance reservation. Warm hospitality throughout.", "bistro", 5, "2026-10-10", "Positive", "clear_positive"),
+    ("REV-021", "The sushi sashimi platter was melt-in-your-mouth fresh. Beautiful presentation on natural slate boards.", "restaurant", 5, "2026-10-11", "Positive", "clear_positive"),
+    ("REV-022", "High-speed elevators, spacious modern bathroom with rain shower, and very quiet corridors throughout our three-night stay.", "hotel", 5, "2026-10-11", "Positive", "clear_positive"),
+    ("REV-023", "Warm chocolate lava cake served with homemade vanilla bean gelato. Decadent, rich, and unforgettable dessert.", "restaurant", 5, "2026-10-12", "Positive", "clear_positive"),
+    ("REV-024", "The cinnamon rolls are massive, gooey, and fresh out of the baker's oven. Arrive early before they sell out.", "bakery", 5, "2026-10-12", "Positive", "clear_positive"),
+    ("REV-025", "Prompt curbside luggage assistance, refreshing welcome drinks upon check-in, and spotless executive suites.", "hotel", 5, "2026-10-13", "Positive", "clear_positive"),
+    ("REV-026", "A culinary gem. The mushroom risotto was creamy, fragrant with white truffle oil, and seasoned to absolute perfection.", "restaurant", 5, "2026-10-13", "Positive", "clear_positive"),
+    ("REV-027", "The patio seating is dog-friendly and shaded with blooming wisteria. Great casual vibe with chilled craft beer.", "bar", 5, "2026-10-14", "Positive", "clear_positive"),
+    ("REV-028", "The barista remembered my oat milk flat white order from yesterday morning. Outstanding customer care.", "cafe", 5, "2026-10-14", "Positive", "clear_positive"),
+    ("REV-029", "Beautiful aesthetic, pristine fitness center with modern cardio machines, and rapid room service delivery.", "hotel", 5, "2026-10-15", "Positive", "clear_positive"),
+    ("REV-030", "Genuinely one of the finest dining experiences we have had this year. Every detail was executed with precision.", "restaurant", 5, "2026-10-15", "Positive", "clear_positive"),
+
+    # ---------------------------------------------------------
+    # 2. CLEAR NEGATIVE & HIGH RISK (REV-031 to REV-055) - 25 reviews
+    # ---------------------------------------------------------
+    ("REV-031", "The chicken was completely pink and raw in the center. When we notified the server, she shrugged and walked away.", "restaurant", 1, "2026-10-16", "Negative", "clear_negative_hygiene"),
+    ("REV-032", "We waited over 75 minutes for two burgers. Both were cold, the buns were soggy, and nobody apologized.", "restaurant", 1, "2026-10-16", "Negative", "clear_negative_delay"),
+    ("REV-033", "Found a live cockroach crawling across the wall right next to our dining booth. Disgusting sanitary conditions.", "restaurant", 1, "2026-10-17", "Negative", "clear_negative_hygiene"),
+    ("REV-034", "The hotel room smelled of stale cigarette smoke and mildew. The bathroom tiles were coated in brown grime.", "hotel", 1, "2026-10-17", "Negative", "clear_negative_hotel"),
+    ("REV-035", "The manager was rude, hostile, and belligerent when we asked why an extra 20% gratuity was added to a two-person check.", "restaurant", 1, "2026-10-18", "Negative", "clear_negative_service"),
+    ("REV-036", "The air conditioning unit did not work in our hotel room during a 90-degree heatwave. Front desk refused to move us.", "hotel", 1, "2026-10-18", "Negative", "clear_negative_hotel"),
+    ("REV-037", "Terrible food poisoning after eating the seafood soup here. I was violently ill for two straight days.", "restaurant", 1, "2026-10-19", "Negative", "clear_negative_health_risk"),
+    ("REV-038", "They charged my credit card twice for the same reservation and customer support refuses to issue a refund.", "hotel", 1, "2026-10-19", "Negative", "clear_negative_billing"),
+    ("REV-039", "Stained bedsheets with hair from previous guests. Housekeeping never showed up despite three calls to reception.", "hotel", 1, "2026-10-20", "Negative", "clear_negative_hotel"),
+    ("REV-040", "Appalling service. We stood at the host stand for twenty minutes while three staff members chatted and ignored us.", "restaurant", 1, "2026-10-20", "Negative", "clear_negative_service"),
+    ("REV-041", "The steak was rubbery, tough, and tasted burnt on the outside while frozen cold on the inside.", "restaurant", 1, "2026-10-21", "Negative", "clear_negative_food"),
+    ("REV-042", "Water leak in the ceiling dripped directly onto our luggage during the night. Management offered zero compensation.", "hotel", 1, "2026-10-21", "Negative", "clear_negative_hotel"),
+    ("REV-043", "The cafe was filthy. Sticky tables, trash overflowing from bins, and dirty cups piled high on empty booths.", "cafe", 1, "2026-10-22", "Negative", "clear_negative_cleanliness"),
+    ("REV-044", "Waited 40 minutes in line for stale pastries that tasted like they were baked three days ago. Complete waste of money.", "bakery", 1, "2026-10-22", "Negative", "clear_negative_food"),
+    ("REV-045", "Extremely loud construction noise starting at 6:00 AM directly outside our bedroom window without any prior notice.", "hotel", 1, "2026-10-23", "Negative", "clear_negative_hotel"),
+    ("REV-046", "The server spilled hot soup down my arm, blamed the table layout, and never offered a napkin or an apology.", "restaurant", 1, "2026-10-23", "Negative", "clear_negative_service"),
+    ("REV-047", "No hot water in the shower for two consecutive mornings. Front desk treated our complaint with complete indifference.", "hotel", 1, "2026-10-24", "Negative", "clear_negative_hotel"),
+    ("REV-048", "Our confirmed table reservation was given away to someone else, and the hostess told us to find another restaurant.", "restaurant", 1, "2026-10-24", "Negative", "clear_negative_service"),
+    ("REV-049", "The coffee was burnt and sour, served in a cracked mug that leaked coffee onto my white shirt.", "cafe", 1, "2026-10-25", "Negative", "clear_negative_food"),
+    ("REV-050", "The advertised heated swimming pool was closed, green with algae, and surrounded by hazard caution tape.", "hotel", 1, "2026-10-25", "Negative", "clear_negative_hotel"),
+    ("REV-051", "Found broken glass at the bottom of my iced beverage. Terrifying safety hazard that could have injured someone.", "bar", 1, "2026-10-26", "Negative", "clear_negative_safety_hazard"),
+    ("REV-052", "Overpriced tourist trap with miniscule portions, aggressive upselling, and rude waitstaff.", "restaurant", 1, "2026-10-26", "Negative", "clear_negative_value"),
+    ("REV-053", "Key cards demagnetized four times in 24 hours. Had to trek down to the lobby every single time with luggage.", "hotel", 1, "2026-10-27", "Negative", "clear_negative_hotel"),
+    ("REV-054", "Food was served lukewarm on dirty chipped plates. The manager argued with us when we asked for a fresh plate.", "restaurant", 1, "2026-10-27", "Negative", "clear_negative_hygiene"),
+    ("REV-055", "Unsanitary restroom with no hand soap or paper towels. Very disturbing for a food establishment.", "restaurant", 1, "2026-10-28", "Negative", "clear_negative_hygiene"),
+
+    # ---------------------------------------------------------
+    # 3. AMBIGUOUS & LOW CONFIDENCE CORRIDOR (REV-056 to REV-070) - 15 reviews
+    # ---------------------------------------------------------
+    ("REV-056", "The soup was warm but under-seasoned, and the bread was standard grocery store quality. Average at best.", "restaurant", 3, "2026-10-16", "Neutral", "ambiguity_corridor"),
+    ("REV-057", "Our room was adequately clean and the check-in took five minutes. The mattress was neither soft nor hard.", "hotel", 3, "2026-10-17", "Neutral", "ambiguity_corridor"),
+    ("REV-058", "A very standard neighborhood coffee shop. The drip coffee was drinkable and the seating was ordinary.", "cafe", 3, "2026-10-17", "Neutral", "ambiguity_corridor"),
+    ("REV-059", "The pasta portion was decent, though the sauce lacked depth. Service was neither fast nor particularly slow.", "restaurant", 3, "2026-10-18", "Neutral", "ambiguity_corridor"),
+    ("REV-060", "Fairly typical airport hotel. Everything worked fine, though the decor feels like it has not been updated since 2005.", "hotel", 3, "2026-10-18", "Neutral", "ambiguity_corridor"),
+    ("REV-061", "Nothing stood out as especially great, but nothing went wrong either. It meets basic expectations for the price.", "restaurant", 3, "2026-10-19", "Neutral", "ambiguity_corridor"),
+    ("REV-062", "The latte was acceptable and the croissant was okay. Seating was moderately crowded during our thirty-minute stay.", "cafe", 3, "2026-10-19", "Neutral", "ambiguity_corridor"),
+    ("REV-063", "The sandwich tasted plain and needed salt. The staff was polite enough when handing over the takeaway bag.", "cafe", 3, "2026-10-20", "Neutral", "ambiguity_corridor"),
+    ("REV-064", "The room was fine for an overnight layover. Shower pressure was mediocre and the breakfast muffins were average.", "hotel", 3, "2026-10-20", "Neutral", "ambiguity_corridor"),
+    ("REV-065", "The lunch special was okay. Not bad enough to complain about, but not something I would go out of my way to order again.", "restaurant", 3, "2026-10-21", "Neutral", "ambiguity_corridor"),
+    ("REV-066", "A passable bakery with typical selections. Bagels were somewhat chewy, but the cream cheese spread was fine.", "bakery", 3, "2026-10-21", "Neutral", "ambiguity_corridor"),
+    ("REV-067", "The dinner was standard fare. Table was clean and food arrived in reasonable time, though flavours were subdued.", "restaurant", 3, "2026-10-22", "Neutral", "ambiguity_corridor"),
+    ("REV-068", "Hotel was right in the middle of everything. Room was basic with no frills, but functional for sleeping.", "hotel", 3, "2026-10-22", "Neutral", "ambiguity_corridor"),
+    ("REV-069", "Service was okay. The burger was fine, fries were standard frozen cuts, and drinks were moderately priced.", "bar", 3, "2026-10-23", "Neutral", "ambiguity_corridor"),
+    ("REV-070", "Quiet atmosphere with plain tables. The hot chocolate was warm but could have had richer cocoa flavour.", "cafe", 3, "2026-10-23", "Neutral", "ambiguity_corridor"),
+
+    # ---------------------------------------------------------
+    # 4. MIXED SENTIMENT / BINARY MODEL STRESS (REV-071 to REV-080) - 10 reviews
+    # ---------------------------------------------------------
+    ("REV-071", "The steak and wine were truly exquisite, however we waited 50 minutes past our reservation and the hostess was unapologetic.", "restaurant", 3, "2026-10-24", "Mixed", "mixed_contrast"),
+    ("REV-072", "Stunning ocean view and extremely comfortable bed, but the air conditioning rattled loudly all night and room service never answered.", "hotel", 3, "2026-10-24", "Mixed", "mixed_contrast"),
+    ("REV-073", "The coffee was rich and flavourful, but the music was so deafening that having a simple conversation was impossible.", "cafe", 3, "2026-10-25", "Mixed", "mixed_contrast"),
+    ("REV-074", "Delicious appetizers and creative dessert, unfortunately our main courses took an hour and arrived lukewarm.", "restaurant", 3, "2026-10-25", "Mixed", "mixed_contrast"),
+    ("REV-075", "The hotel facilities and spa pool were pristine, but the front desk clerk was condescending when answering basic questions.", "hotel", 3, "2026-10-26", "Mixed", "mixed_contrast"),
+    ("REV-076", "Beautiful rustic ambience with candlelit tables, but the portion sizes were comical for the exorbitant prices charged.", "bistro", 3, "2026-10-26", "Mixed", "mixed_contrast"),
+    ("REV-077", "The bartender makes brilliant craft cocktails, yet the bouncer at the door was unnecessarily aggressive and rude.", "bar", 3, "2026-10-27", "Mixed", "mixed_contrast"),
+    ("REV-078", "The hotel location next to the train station is unbeatable, though the thin walls meant we heard sirens all through the night.", "hotel", 3, "2026-10-27", "Mixed", "mixed_contrast"),
+    ("REV-079", "Fantastic fresh sourdough loaves, however the cashier seemed annoyed by questions and gave incorrect change.", "bakery", 3, "2026-10-28", "Mixed", "mixed_contrast"),
+    ("REV-080", "The salmon fillet was moist and delicious, but our waiter forgot our side orders and vanished for forty minutes.", "restaurant", 3, "2026-10-28", "Mixed", "mixed_contrast"),
+
+    # ---------------------------------------------------------
+    # 5. SERVICE RECOVERY AFTER FAILURE (REV-081 to REV-085) - 5 reviews
+    # ---------------------------------------------------------
+    ("REV-081", "Our steak was initially overcooked, but the floor manager noticed, apologized sincerely, and replaced it immediately with complimentary dessert.", "restaurant", 4, "2026-10-29", "Positive", "service_recovery"),
+    ("REV-082", "There was a check-in mixup with our room key, but the front desk team upgraded us to an executive suite with lounge access to make amends.", "hotel", 5, "2026-10-29", "Positive", "service_recovery"),
+    ("REV-083", "My latte was made with dairy instead of oat milk, but the barista caught the mistake right away, remade it fresh, and refunded my order.", "cafe", 4, "2026-10-29", "Positive", "service_recovery"),
+    ("REV-084", "The kitchen was delayed with our entrees, but the manager comped our appetizers and kept us informed with total professionalism.", "restaurant", 4, "2026-10-30", "Positive", "service_recovery"),
+    ("REV-085", "Our room was not ready at 3 PM check-in, but the concierge stored our bags, gave us beverage vouchers, and had our room perfected by 3:45.", "hotel", 4, "2026-10-30", "Positive", "service_recovery"),
+
+    # ---------------------------------------------------------
+    # 6. SARCASM & SUBTLE NEGATIVE (REV-086 to REV-090) - 5 reviews
+    # ---------------------------------------------------------
+    ("REV-086", "Oh wonderful, loved paying forty dollars for lukewarm tap water and a salad that looked like tired lawn clippings.", "restaurant", 1, "2026-10-29", "Negative", "sarcasm_negative"),
+    ("REV-087", "Nothing quite like waiting two hours for a cold rubber pizza to really make your Friday evening feel special.", "restaurant", 1, "2026-10-29", "Negative", "sarcasm_negative"),
+    ("REV-088", "What a treat to be yelled at by the manager simply for asking where the restroom was located. Pure class.", "bar", 1, "2026-10-30", "Negative", "sarcasm_negative"),
+    ("REV-089", "So glad the hotel advertised peaceful luxury so we could enjoy the soothing melodic sounds of hallway drilling all weekend.", "hotel", 1, "2026-10-30", "Negative", "sarcasm_negative"),
+    ("REV-090", "Fascinating business strategy to ignore seated paying customers for forty minutes while checking personal phones behind the bar.", "bar", 1, "2026-10-30", "Negative", "sarcasm_negative"),
+
+    # ---------------------------------------------------------
+    # 7. DOMAIN SAFEGUARDS & ADJACENT/OUT-OF-DOMAIN (REV-091 to REV-096) - 6 reviews
+    # ---------------------------------------------------------
+    ("REV-091", "The broadband fiber connection dropped for three full days and customer support hung up twice without diagnosing the line issue.", "telecommunications", 1, "2026-10-31", "Negative", "out_of_domain_safeguard"),
+    ("REV-092", "My mobile data plan ran out in 24 hours despite paying for unlimited 5G roaming. Billing team refused to look into the dispute.", "telecommunications", 1, "2026-10-31", "Negative", "out_of_domain_safeguard"),
+    ("REV-093", "The oil change and brake pad replacement took three hours longer than promised, and the mechanic charged extra labor without approval.", "automotive", 1, "2026-10-31", "Negative", "out_of_domain_safeguard"),
+    ("REV-094", "The package delivery was delayed by four days, but the cardboard box was intact and the online tracking dashboard was clear.", "retail_logistics", 3, "2026-10-31", "Mixed", "adjacent_domain"),
+    ("REV-095", "The tour guide was knowledgeable and the scenic mountain vistas were spectacular, though the bus had cramped legroom.", "travel_tourism", 4, "2026-10-31", "Positive", "adjacent_domain"),
+    ("REV-096", "The cryptocurrency wallet software froze during transaction verification and the support chat agent gave boilerplate non-answers.", "cryptocurrency", 1, "2026-10-31", "Negative", "out_of_domain_safeguard"),
+
+    # ---------------------------------------------------------
+    # 8. EXTENDED LENGTH, UNICODE, & INTENTIONAL INVALID NOISE (REV-097 to REV-100) - 4 reviews
+    # ---------------------------------------------------------
+    ("REV-097", "The cr\u00e8me br\u00fbl\u00e9e was sublime with a delicate caramelized crust, and the caf\u00e9 au lait tasted like an authentic morning in Saint-Germain.", "cafe", 5, "2026-10-31", "Positive", "unicode_accents"),
+    ("REV-098", "We booked this historic boutique property for our twentieth anniversary celebration. From the personalized welcome letter and chilled champagne in our suite to the attentive concierge recommendations for local art galleries, every moment felt bespoke and memorable. The bed was remarkably comfortable, acoustic insulation was whisper quiet, and the courtyard breakfast was peaceful.", "hotel", 5, "2026-10-31", "Positive", "extended_long_review"),
+    ("REV-099", "no", "restaurant", 1, "2026-10-31", "Invalid", "deliberate_short_noise"),
+    ("REV-100", "", "hotel", 1, "2026-10-31", "Invalid", "deliberate_empty_row")
+]
+
+csv_file_path = Path("revio_100_reviews_comprehensive_test.csv")
+
+with open(csv_file_path, mode="w", newline="", encoding="utf-8") as f:
+    writer = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
+    writer.writerow(["review_id", "review_text", "domain", "rating", "date", "expected_sentiment", "test_category"])
+    for row in reviews_data:
+        writer.writerow(row)
+
+print(f"Generated comprehensive test CSV at: {csv_file_path.resolve()}")
+print(f"Total rows written: {len(reviews_data)} (Header + 100 data rows)")

@@ -1744,3 +1744,39 @@
   - Unicode Emoji (`RV019` "😋"): Handled seamlessly (99.96% positive).
 - **Deployment Status:** Production live at [https://revio-taupe.vercel.app](https://revio-taupe.vercel.app).
 
+---
+
+## 2026-10-31 - Comprehensive 100-Review Wholesome Testing Suite
+
+### Request & Rationale
+- **Request:** Generate another CSV file with 100 reviews for complete, wholesome testing of Revio.
+- **Rationale:** Provide a balanced, production-grade test dataset spanning all business sectors, operational edge cases, subtle sentiment corridors, domain safeguards, recovery narratives, and deliberate data anomalies to thoroughly exercise Revio's UI, batch inference, triage logic, and data validation pipelines.
+
+### Actions Performed & Files Changed
+1. **Authored Comprehensive 100-Review Dataset (`revio_100_reviews_comprehensive_test.csv`):**
+   - Built with 1 header + 100 RFC-4180 CSV rows structured across 7 standard columns: `review_id`, `review_text`, `domain`, `rating`, `date`, `expected_sentiment`, `test_category`.
+   - Category Breakdown:
+     - **Clear Positives (30 rows, `REV-001`–`REV-030`):** Restaurants, hotels, cafes, bakeries, rooftop bars, spas, bistros with varied positive lexical markers.
+     - **Clear Negatives & Severe Defects (25 rows, `REV-031`–`REV-055`):** Food safety, cockroaches, dirty hotel rooms, AC failures, billing double-charges, hostile managers, broken glass.
+     - **Ambiguity Corridor $[0.40, 0.60]$ (15 rows, `REV-056`–`REV-070`):** Mediocre food, standard layover rooms, plain coffee, neither good nor bad experiences.
+     - **Mixed Sentiment / Binary Model Stress (10 rows, `REV-071`–`REV-080`):** Strong contrasts joined by "however", "although", "yet", "on the other hand".
+     - **Service Recovery Narratives (5 rows, `REV-081`–`REV-085`):** Initial operational failure followed by immediate staff remediation and customer satisfaction.
+     - **Sarcasm & Subtle Negatives (5 rows, `REV-086`–`REV-090`):** Ironic expressions of dissatisfaction ("Oh wonderful, loved paying forty dollars for lukewarm tap water...").
+     - **Domain Safeguards & Out-of-Domain (6 rows, `REV-091`–`REV-096`):** Fiber broadband outages, mobile data disputes, automotive repairs, retail logistics, crypto wallets.
+     - **Syntax, Unicode, Long Reviews & Filter Testing (4 rows, `REV-097`–`REV-100`):** French accented unicode (crème brûlée, café), 120-word multi-clause hotel review, short noise row (`"no"`), and empty row `""`.
+2. **Batch Evaluation Against Production Vercel (`scripts/evaluate_100_reviews.py`):**
+   - Verified that Revio's `parseCsvContent()` cleanly filters the 2 invalid rows (`REV-099` and `REV-100`).
+   - Dispatched 98 valid reviews to `POST https://revio-taupe.vercel.app/api/v1/revio/batch`.
+   - Results persisted to `scripts/revio_100_reviews_evaluation_results.json`.
+
+### Verification Results
+- **Batch Processing Latency:** 98 reviews processed in **896 ms total serverless inference time** (~$9.1$ ms/review).
+- **Sentiment Distribution:** 36 Positive ($36.7\%$), 62 Negative ($63.3\%$).
+- **Triage Actions:**
+  - `LOW PRIORITY / NO HUMAN REVIEW REQUIRED`: 31 reviews ($31.6\%$)
+  - `ESCALATE (Negative / High Risk)`: 54 reviews ($55.1\%$)
+  - `ESCALATE (Ambiguity / Low Confidence)`: 13 reviews ($13.3\%$)
+- **Data Validation & Pre-Filter:** 2 / 100 rows filtered out before inference (100% precision on empty/short string detection).
+- **UTF-8 Parity:** Accented characters verified at byte level (`\xc3\xa8`, `\xc3\xbb`, `\xc3\xa9`).
+
+
