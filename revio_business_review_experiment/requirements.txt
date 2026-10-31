@@ -1,6 +1,0 @@
-# Python 3.10 or 3.11 recommended; compatible with the repo's Python 3.10 target.
-datasets>=2.19,<4.0
-joblib>=1.4,<2.0
-numpy>=1.26,<3.0
-scikit-learn>=1.5,<2.0
-nltk>=3.8.1,<4.0
