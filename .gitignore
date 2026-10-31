@@ -24,3 +24,6 @@ data/cleaned_imdb.csv
 .env
 .pytest_cache/
 v/
+
+.vercel
+.env*
